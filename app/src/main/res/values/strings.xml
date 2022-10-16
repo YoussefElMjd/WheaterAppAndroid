@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">g56172</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="hintPassword">Enter a password</string>
+    <string name="loginHint">Enter your email</string>
+    <string name="loginButton">LOGIN</string>
+</resources>
