@@ -4,3 +4,12 @@ plugins {
     id 'com.android.library' version '7.3.0' apply false
     id 'org.jetbrains.kotlin.android' version '1.7.10' apply false
 }
+ext {
+    kotlin_version = '1.4.10'
+    archLifecycleVersion = '1.1.1'
+    gradleVersion = '4.1.0'
+    supportlibVersion = '1.2.0'
+    navigationVersion = "2.3.0"
+    dataBindingCompilerVersion = gradleVersion
+}
+
