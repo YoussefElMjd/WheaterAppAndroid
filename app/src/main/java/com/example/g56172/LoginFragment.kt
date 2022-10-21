@@ -1,6 +1,7 @@
 package com.example.g56172
 
 import android.content.Context
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
@@ -15,14 +16,17 @@ import androidx.navigation.findNavController
 import com.example.g56172.databinding.FragmentLoginBinding
 import android.widget.TextView
 import androidx.core.content.getSystemService
+import androidx.databinding.DataBindingUtil.setContentView
 
 
 class LoginFragment : Fragment() {
+    private lateinit var binding: FragmentLoginBinding
+    private lateinit var bindingLand: FragmentLoginBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = DataBindingUtil.inflate<FragmentLoginBinding>(
+        binding = DataBindingUtil.inflate<FragmentLoginBinding>(
             inflater,
             R.layout.fragment_login,
             container,
@@ -30,6 +34,18 @@ class LoginFragment : Fragment() {
         )
         binding.loginButton.setOnClickListener {
             if (attemptLogin(binding)) {
+                it.findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                hideKeyBoard(it)
+            }
+        }
+        bindingLand = DataBindingUtil.inflate<FragmentLoginBinding>(
+            inflater,
+            R.layout.fragment_login_landscape,
+            container,
+            false
+        )
+        bindingLand.loginButton.setOnClickListener {
+            if (attemptLogin(bindingLand)) {
                 it.findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                 hideKeyBoard(it)
             }
@@ -59,9 +75,18 @@ class LoginFragment : Fragment() {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
-    fun hideKeyBoard(view : View){
-        val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    fun hideKeyBoard(view: View) {
+        val inputMethodManager =
+            activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
 
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        if (newConfig.orientation === Configuration.ORIENTATION_LANDSCAPE) {
+            .setContentView(R.layout.fragment_login_landscape)
+        } else if (newConfig.orientation === Configuration.ORIENTATION_PORTRAIT) {
+            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show()
+        }
     }
 }
