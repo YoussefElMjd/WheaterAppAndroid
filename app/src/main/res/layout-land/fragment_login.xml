@@ -10,14 +10,19 @@
     >
 
         <TextView
+            android:id="@+id/loginFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="-58dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+        <TextView
             android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="20dp"
             app:drawableLeftCompat="@drawable/ic_email_login"
             app:layout_constraintBottom_toBottomOf="@+id/emailfield"
-            app:layout_constraintEnd_toStartOf="@+id/emailfield"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/emailfield" />
 
@@ -25,37 +30,35 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="19dp"
-            android:layout_marginStart="70dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="50dp"
             app:drawableLeftCompat="@drawable/ic_password_login"
-            app:layout_constraintBaseline_toBaselineOf="@+id/passwordfield"
-            app:layout_constraintEnd_toStartOf="@+id/passwordfield"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@+id/passwordfield"
+            app:layout_constraintStart_toEndOf="@+id/emailfield"
+            app:layout_constraintTop_toTopOf="@+id/passwordfield" />
 
         <EditText
             android:id="@+id/passwordfield"
             style="@style/editTextLoginPage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="80dp"
+            android:layout_marginStart="10dp"
             android:ems="10"
             android:hint="@string/hintPassword"
             android:imeOptions="flagNoExtractUi"
+            android:inputType="textPassword"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
             android:background="@drawable/custom_input"
-            android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailfield"/>
+            app:layout_constraintBottom_toBottomOf="@+id/loginFragment"
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <EditText
             android:id="@+id/emailfield"
             style="@style/editTextLoginPage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
-            android:layout_marginEnd="80dp"
+            android:layout_marginStart="10dp"
             android:ems="10"
             android:hint="@string/loginHint"
             android:imeOptions="flagNoExtractUi"
@@ -63,8 +66,9 @@
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
             android:background="@drawable/custom_input"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/email"
+            app:layout_constraintTop_toTopOf="@+id/loginFragment">
 
             <requestFocus />
         </EditText>
@@ -73,13 +77,15 @@
             android:id="@+id/loginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="290dp"
-            android:ems="13"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:ems="11"
             android:text="@string/loginButton"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/passwordfield"
-            app:layout_constraintStart_toStartOf="@+id/passwordfield"
-            app:layout_constraintTop_toBottomOf="@+id/passwordfield" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.498" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
