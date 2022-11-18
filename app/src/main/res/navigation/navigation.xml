@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/aboutMe"
-        android:name="com.example.g56172.AboutMe"
+        android:name="com.example.g56172.screen.about.AboutMeFragment"
         android:label="fragment_about_me"
         tools:layout="@layout/fragment_about_me" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.g56172.LoginFragment"
+        android:name="com.example.g56172.screen.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/homesFragment"
-        android:name="com.example.g56172.HomeFragment"
+        android:name="com.example.g56172.screen.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.g56172
+package com.example.g56172.screen.about
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,9 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.example.g56172.R
 import com.example.g56172.databinding.FragmentAboutMeBinding
 
-class AboutMe : Fragment() {
+class AboutMeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

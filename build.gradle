@@ -10,6 +10,7 @@ ext {
     gradleVersion = '4.1.0'
     supportlibVersion = '1.2.0'
     navigationVersion = "2.5.2"
+    room_version = '2.2.5'
     dataBindingCompilerVersion = gradleVersion
 }
 

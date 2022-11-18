@@ -1,4 +1,4 @@
-package com.example.g56172
+package com.example.g56172.screen.login
 
 import android.content.Context
 import android.os.Bundle
@@ -11,17 +11,22 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import com.example.g56172.R
+import com.example.g56172.database.UserLogin
+import com.example.g56172.database.WeatherDataBase
 import com.example.g56172.databinding.FragmentLoginBinding
 
 
 class LoginFragment : Fragment() {
+    private lateinit var binding: LoginFragment
+    private lateinit var viewModel: LoginViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
        val binding = DataBindingUtil.inflate<FragmentLoginBinding>(
             inflater,
-            R.layout.fragment_login,
+           R.layout.fragment_login,
             container,
             false
         )
@@ -31,6 +36,11 @@ class LoginFragment : Fragment() {
                 hideKeyBoard(it)
             }
         }
+//        var db = WeatherDataBase.getInstance(requireContext())
+//        var dao = db.userLoginDao
+//        val userLogin = UserLogin(login = "Youssef.ElMajdoul@gmail.com")
+//            dao.deleteAll()
+//        val lastUser = userLoginDao.get("Youssef.ElMajdoul@gmail.com")
         return binding.root
     }
 
