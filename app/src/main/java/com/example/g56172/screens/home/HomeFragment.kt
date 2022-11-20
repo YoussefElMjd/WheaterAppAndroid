@@ -1,4 +1,4 @@
-package com.example.g56172.screen.home
+package com.example.g56172.screens.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

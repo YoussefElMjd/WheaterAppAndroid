@@ -2,6 +2,12 @@
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="loginViewModel"
+            type="com.example.g56172.screens.login.LoginViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent"
@@ -16,10 +22,10 @@
             android:layout_marginStart="70dp"
             android:layout_marginEnd="10dp"
             app:drawableLeftCompat="@drawable/ic_email_login"
-            app:layout_constraintBottom_toBottomOf="@+id/emailfield"
-            app:layout_constraintEnd_toStartOf="@+id/emailfield"
+            app:layout_constraintBottom_toBottomOf="@+id/emailfields"
+            app:layout_constraintEnd_toStartOf="@+id/emailfields"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/emailfield" />
+            app:layout_constraintTop_toTopOf="@+id/emailfields" />
 
         <TextView
             android:id="@+id/textView2"
@@ -46,28 +52,29 @@
             android:paddingEnd="12dp"
             android:background="@drawable/custom_input"
             android:inputType="textPassword"
+            android:text="@={loginViewModel._password}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailfield"/>
+            app:layout_constraintTop_toBottomOf="@+id/emailfields"/>
 
-        <EditText
-            android:id="@+id/emailfield"
+
+        <AutoCompleteTextView
             style="@style/editTextLoginPage"
+            android:id="@+id/emailfields"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="150dp"
             android:layout_marginEnd="80dp"
+            android:background="@drawable/custom_input"
             android:ems="10"
             android:hint="@string/loginHint"
             android:imeOptions="flagNoExtractUi"
             android:inputType="textEmailAddress"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
-            android:background="@drawable/custom_input"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <requestFocus />
-        </EditText>
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@={loginViewModel._email}"
+            ></AutoCompleteTextView>
 
         <Button
             android:id="@+id/loginButton"
@@ -76,6 +83,7 @@
             android:layout_marginBottom="290dp"
             android:ems="13"
             android:text="@string/loginButton"
+            android:onClick="@{() -> loginViewModel.attemptLogin()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/passwordfield"
             app:layout_constraintStart_toStartOf="@+id/passwordfield"

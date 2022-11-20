@@ -1,4 +1,4 @@
-package com.example.g56172.screen.about
+package com.example.g56172.screens.about
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

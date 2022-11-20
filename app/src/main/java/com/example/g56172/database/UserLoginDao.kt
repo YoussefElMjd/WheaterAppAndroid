@@ -27,7 +27,7 @@ interface UserLoginDao {
 
 
     @Query("SELECT * FROM UserConnection")
-    fun getAll() : LiveData<List<UserLogin>>?
+    fun getAll() : List<UserLogin>?
 
     @Query("SELECT * FROM UserConnection where login = :email")
     fun get(email: String) : UserLogin?

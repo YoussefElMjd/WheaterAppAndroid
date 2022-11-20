@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".screen.home.HomeFragment">
+    tools:context=".screens.home.HomeFragment">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/aboutmeConstraint"
         android:layout_width="match_parent"
