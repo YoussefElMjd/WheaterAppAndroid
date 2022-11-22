@@ -120,32 +120,6 @@
                 />
 
             <TextView
-                android:id="@+id/mphText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="190dp"
-                android:fontFamily="@font/raleway_medium"
-                android:text="7"
-                android:textColor="@color/primaryColorText"
-                android:textSize="40sp"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="877dp"
-                />
-
-            <TextView
-                android:id="@+id/numberMphText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="212dp"
-                android:fontFamily="@font/raleway_medium"
-                android:text="mph"
-                android:textColor="@color/secondaryColorText"
-                android:textSize="30sp"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="882dp"
-                />
-
-            <TextView
                 android:id="@+id/dateText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -196,15 +170,17 @@
                 android:textColor="@color/primaryColorText"
                 android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchButton" />
+                app:layout_constraintTop_toBottomOf="@+id/searchButton"/>
+
 
             <TextView
                 android:id="@+id/detailTextOne"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="28dp"
                 android:width="375dp"
                 android:height="150dp"
+                android:background="@color/secondaryBackgroundColor"
                 android:fontFamily="@font/raleway_medium"
                 android:gravity="center|top"
                 android:text="Wind status"
@@ -213,6 +189,36 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detailText" />
+
+            <TextView
+                android:id="@+id/mphText"
+                android:layout_width="21dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="130dp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="7"
+                android:textColor="@color/primaryColorText"
+                android:textSize="40sp"
+                app:layout_constraintBottom_toBottomOf="@+id/detailTextOne"
+                app:layout_constraintEnd_toStartOf="@+id/numberMphText"
+                app:layout_constraintStart_toStartOf="@+id/detailTextOne"
+                app:layout_constraintTop_toTopOf="@+id/detailTextOne"
+                app:layout_constraintVertical_bias="0.53" />
+
+            <TextView
+                android:id="@+id/numberMphText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="mph"
+                android:textColor="@color/secondaryColorText"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="@+id/detailTextOne"
+                app:layout_constraintEnd_toEndOf="@+id/detailTextOne"
+                app:layout_constraintStart_toStartOf="@+id/detailTextOne"
+                app:layout_constraintTop_toTopOf="@+id/detailTextOne" />
 
             <TextView
                 android:id="@+id/detailTextSecond"
