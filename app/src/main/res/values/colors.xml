@@ -12,4 +12,5 @@
     <color name="secondaryBackgroundColor">#100E1D</color>
     <color name="primaryColorText">#E7E7EB</color>
     <color name="secondaryColorText">#A09FB1</color>
+    <color name="progressBarColor">#FFEC65</color>
 </resources>

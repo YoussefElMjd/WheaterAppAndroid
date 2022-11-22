@@ -16,15 +16,32 @@
             android:layout_height="match_parent"
             android:windowSoftInputMode="adjustResize">
 
-            <Button
+
+            <ImageView
+                android:id="@+id/cloudBackgroundImage"
+                android:layout_width="699dp"
+                android:layout_height="525dp"
+                android:src="@drawable/cloud_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/geoButton"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="60dp"
                 android:layout_marginEnd="12dp"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
                 android:backgroundTint="@color/secondaryColorText"
-                android:fontFamily="@font/raleway_semibold"
-                android:text="g"
+                app:icon="@drawable/ic_geo_localisation"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="35dp"
+                app:cornerRadius="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -183,6 +200,7 @@
                 android:background="@color/secondaryBackgroundColor"
                 android:fontFamily="@font/raleway_medium"
                 android:gravity="center|top"
+                android:paddingTop="15dp"
                 android:text="Wind status"
                 android:textColor="@color/primaryColorText"
                 android:textSize="20sp"
@@ -191,22 +209,23 @@
                 app:layout_constraintTop_toBottomOf="@+id/detailText" />
 
             <TextView
-                android:id="@+id/mphText"
-                android:layout_width="21dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="130dp"
-                android:fontFamily="@font/raleway_medium"
-                android:text="7"
+                android:id="@+id/numberMphText"
+                android:layout_width="55dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="100dp"
+                android:fontFamily="@font/raleway_semibold"
+                android:text="17"
+                android:textAlignment="textEnd"
                 android:textColor="@color/primaryColorText"
                 android:textSize="40sp"
                 app:layout_constraintBottom_toBottomOf="@+id/detailTextOne"
-                app:layout_constraintEnd_toStartOf="@+id/numberMphText"
+                app:layout_constraintEnd_toStartOf="@+id/mphText"
                 app:layout_constraintStart_toStartOf="@+id/detailTextOne"
                 app:layout_constraintTop_toTopOf="@+id/detailTextOne"
                 app:layout_constraintVertical_bias="0.53" />
 
             <TextView
-                android:id="@+id/numberMphText"
+                android:id="@+id/mphText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -221,30 +240,97 @@
                 app:layout_constraintTop_toTopOf="@+id/detailTextOne" />
 
             <TextView
+                android:id="@+id/windDirectionText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="WSW"
+                android:textColor="@color/primaryColorText"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/detailTextOne"
+                app:layout_constraintEnd_toEndOf="@+id/detailTextOne"
+                app:layout_constraintStart_toStartOf="@+id/detailTextOne"
+                app:layout_constraintTop_toBottomOf="@+id/mphText" />
+
+            <TextView
                 android:id="@+id/detailTextSecond"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:width="375dp"
                 android:height="150dp"
+                android:background="@color/secondaryBackgroundColor"
                 android:fontFamily="@font/raleway_medium"
                 android:gravity="center|top"
                 android:text="Humidity"
+                android:paddingTop="15dp"
                 android:textColor="@color/primaryColorText"
                 android:textSize="20sp"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detailTextOne" />
 
             <TextView
+                android:id="@+id/numberHumidityText"
+                android:layout_width="55dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="120dp"
+                android:fontFamily="@font/raleway_semibold"
+                android:text="84"
+                android:textAlignment="textEnd"
+                android:textColor="@color/primaryColorText"
+                android:textSize="40sp"
+                app:layout_constraintBottom_toBottomOf="@+id/detailTextSecond"
+                app:layout_constraintEnd_toStartOf="@+id/pourcentText"
+                app:layout_constraintStart_toStartOf="@+id/detailTextSecond"
+                app:layout_constraintTop_toTopOf="@+id/detailTextSecond"
+                app:layout_constraintVertical_bias="0.53" />
+
+            <TextView
+                android:id="@+id/pourcentText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="%"
+                android:textColor="@color/secondaryColorText"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="@+id/detailTextSecond"
+                app:layout_constraintEnd_toEndOf="@+id/detailTextSecond"
+                app:layout_constraintStart_toStartOf="@+id/detailTextSecond"
+                app:layout_constraintTop_toTopOf="@+id/detailTextSecond" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="324dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="25dp"
+                android:foregroundTint="@color/progressBarColor"
+                android:indeterminate="false"
+                android:indeterminateTint="@color/progressBarColor"
+                android:max="100"
+                android:min="0"
+                android:progress="84"
+                android:progressTint="@color/progressBarColor"
+                app:layout_constraintEnd_toEndOf="@+id/detailTextSecond"
+                app:layout_constraintStart_toStartOf="@+id/detailTextSecond"
+                app:layout_constraintTop_toBottomOf="@+id/pourcentText" />
+
+            <TextView
                 android:id="@+id/detailTextThird"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="28dp"
                 android:width="375dp"
                 android:height="150dp"
+                android:background="@color/secondaryBackgroundColor"
                 android:fontFamily="@font/raleway_medium"
                 android:gravity="center|top"
+                android:paddingTop="15dp"
                 android:text="Visibility"
                 android:textColor="@color/primaryColorText"
                 android:textSize="20sp"
@@ -253,20 +339,85 @@
                 app:layout_constraintTop_toBottomOf="@+id/detailTextSecond" />
 
             <TextView
+                android:id="@+id/numberVisibilityText"
+                android:layout_width="87dp"
+                android:layout_height="49dp"
+                android:layout_marginStart="65dp"
+                android:fontFamily="@font/raleway_semibold"
+                android:text="6,4"
+                android:textAlignment="textEnd"
+                android:textColor="@color/primaryColorText"
+                android:textSize="40sp"
+                app:layout_constraintBottom_toBottomOf="@+id/detailTextThird"
+                app:layout_constraintEnd_toStartOf="@+id/milesText"
+                app:layout_constraintStart_toStartOf="@+id/detailTextThird"
+                app:layout_constraintTop_toTopOf="@+id/detailTextThird"
+                app:layout_constraintVertical_bias="0.53" />
+
+            <TextView
+                android:id="@+id/milesText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="miles"
+                android:textColor="@color/secondaryColorText"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="@+id/detailTextThird"
+                app:layout_constraintEnd_toEndOf="@+id/detailTextThird"
+                app:layout_constraintStart_toStartOf="@+id/detailTextThird"
+                app:layout_constraintTop_toTopOf="@+id/detailTextThird" />
+
+            <TextView
                 android:id="@+id/detailTextFourth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:width="375dp"
                 android:height="150dp"
+                android:background="@color/secondaryBackgroundColor"
                 android:fontFamily="@font/raleway_medium"
                 android:gravity="center|top"
                 android:text="Air Pressure"
+                android:paddingTop="15dp"
                 android:textColor="@color/primaryColorText"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detailTextThird" />
+
+            <TextView
+                android:id="@+id/numberAirPressureText"
+                android:layout_width="87dp"
+                android:layout_height="49dp"
+                android:layout_marginStart="90dp"
+                android:fontFamily="@font/raleway_semibold"
+                android:text="998"
+                android:textAlignment="textEnd"
+                android:textColor="@color/primaryColorText"
+                android:textSize="40sp"
+                app:layout_constraintBottom_toBottomOf="@+id/detailTextFourth"
+                app:layout_constraintEnd_toStartOf="@+id/mbText"
+                app:layout_constraintStart_toStartOf="@+id/detailTextFourth"
+                app:layout_constraintTop_toTopOf="@+id/detailTextFourth"
+                app:layout_constraintVertical_bias="0.53" />
+
+            <TextView
+                android:id="@+id/mbText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="mb"
+                android:textColor="@color/secondaryColorText"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="@+id/detailTextFourth"
+                app:layout_constraintEnd_toEndOf="@+id/detailTextFourth"
+                app:layout_constraintStart_toStartOf="@+id/detailTextFourth"
+                app:layout_constraintTop_toTopOf="@+id/detailTextFourth" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
