@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".screens.home.HomeFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:background="@color/secondaryBackgroundColor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/days1Block"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="50dp"
+        android:width="120dp"
+        android:height="190dp"
+        android:background="@color/primaryBackgroundColor"
+        android:fontFamily="@font/raleway_medium"
+        android:gravity="center|top"
+        android:paddingTop="15dp"
+        android:text="Tomorrow"
+        android:textColor="@color/primaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/days1Image"
+        android:layout_width="87dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/days1Block"
+        app:layout_constraintStart_toStartOf="@+id/days1Block"
+        app:layout_constraintTop_toTopOf="@+id/days1Block"
+        app:srcCompat="@drawable/heavy_rain" />
+
+    <TextView
+        android:id="@+id/days1MaxText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="15"
+        android:textColor="@color/primaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/days1Image"
+        app:layout_constraintTop_toBottomOf="@+id/days1Image" />
+
+    <TextView
+        android:id="@+id/days1MaxCelsiusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="°C"
+        android:textColor="@color/primaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/days1MaxText"
+        app:layout_constraintTop_toBottomOf="@+id/days1Image" />
+
+
+    <TextView
+        android:id="@+id/days1MinText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="15"
+        android:textColor="@color/secondaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/days1MinCelsiusText"
+        app:layout_constraintTop_toBottomOf="@+id/days1Image" />
+
+    <TextView
+        android:id="@+id/days1MinCelsiusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="°C"
+        android:textColor="@color/secondaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/days1Image"
+        app:layout_constraintTop_toBottomOf="@+id/days1Image" />
+
+    <TextView
+        android:id="@+id/days2Block"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="120dp"
+        android:height="190dp"
+        android:background="@color/primaryBackgroundColor"
+        android:fontFamily="@font/raleway_medium"
+        android:gravity="center|top"
+        android:paddingTop="15dp"
+        android:text="Sun. 7 Jun"
+        android:textColor="@color/primaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/days1Block"
+        app:layout_constraintTop_toTopOf="@+id/days1Block" />
+
+    <ImageView
+        android:id="@+id/days2Image"
+        android:layout_width="87dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/days2Block"
+        app:layout_constraintStart_toStartOf="@+id/days2Block"
+        app:layout_constraintTop_toTopOf="@+id/days2Block"
+        app:srcCompat="@drawable/hail" />
+
+    <TextView
+        android:id="@+id/days2MaxText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="15"
+        android:textColor="@color/primaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/days2Image"
+        app:layout_constraintTop_toBottomOf="@+id/days2Image" />
+
+    <TextView
+        android:id="@+id/days2MaxCelsiusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="°C"
+        android:textColor="@color/primaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/days2MaxText"
+        app:layout_constraintTop_toBottomOf="@+id/days2Image" />
+
+
+    <TextView
+        android:id="@+id/days2MinText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="15"
+        android:textColor="@color/secondaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/days2MinCelsiusText"
+        app:layout_constraintTop_toBottomOf="@+id/days2Image" />
+
+    <TextView
+        android:id="@+id/days2MinCelsiusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="°C"
+        android:textColor="@color/secondaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/days2Image"
+        app:layout_constraintTop_toBottomOf="@+id/days2Image" />
+
+
+    <TextView
+        android:id="@+id/days3Block"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:width="120dp"
+        android:height="190dp"
+        android:background="@color/primaryBackgroundColor"
+        android:fontFamily="@font/raleway_medium"
+        android:gravity="center|top"
+        android:paddingTop="15dp"
+        android:text="Mon. 8 Jun"
+        android:textColor="@color/primaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/days1Block"
+        app:layout_constraintStart_toStartOf="@+id/days1Block"
+        app:layout_constraintTop_toBottomOf="@+id/days1Block" />
+
+
+    <ImageView
+        android:id="@+id/days3Image"
+        android:layout_width="87dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/days3Block"
+        app:layout_constraintStart_toStartOf="@+id/days3Block"
+        app:layout_constraintTop_toTopOf="@+id/days3Block"
+        app:srcCompat="@drawable/heavy_rain" />
+
+    <TextView
+        android:id="@+id/days3MaxText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="15"
+        android:textColor="@color/primaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/days3Image"
+        app:layout_constraintTop_toBottomOf="@+id/days3Image" />
+
+    <TextView
+        android:id="@+id/days3MaxCelsiusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="°C"
+        android:textColor="@color/primaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/days3MaxText"
+        app:layout_constraintTop_toBottomOf="@+id/days3Image" />
+
+
+    <TextView
+        android:id="@+id/days3MinText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="15"
+        android:textColor="@color/secondaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/days3MinCelsiusText"
+        app:layout_constraintTop_toBottomOf="@+id/days3Image" />
+
+    <TextView
+        android:id="@+id/days3MinCelsiusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="°C"
+        android:textColor="@color/secondaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/days3Image"
+        app:layout_constraintTop_toBottomOf="@+id/days3Image" />
+
+    <TextView
+        android:id="@+id/days4Block"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:width="120dp"
+        android:height="190dp"
+        android:background="@color/primaryBackgroundColor"
+        android:fontFamily="@font/raleway_medium"
+        android:gravity="center|top"
+        android:paddingTop="15dp"
+        android:text="Tue. 9 Jun"
+        android:textColor="@color/primaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/days2Block"
+        app:layout_constraintHorizontal_bias="0.549"
+        app:layout_constraintStart_toStartOf="@+id/days2Block"
+        app:layout_constraintTop_toBottomOf="@+id/days2Block" />
+
+    <ImageView
+        android:id="@+id/days4Image"
+        android:layout_width="87dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/days4Block"
+        app:layout_constraintStart_toStartOf="@+id/days4Block"
+        app:layout_constraintTop_toTopOf="@+id/days4Block"
+        app:srcCompat="@drawable/hail" />
+
+    <TextView
+        android:id="@+id/days4MaxText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="15"
+        android:textColor="@color/primaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/days4Image"
+        app:layout_constraintTop_toBottomOf="@+id/days4Image" />
+
+    <TextView
+        android:id="@+id/days4MaxCelsiusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="°C"
+        android:textColor="@color/primaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/days4MaxText"
+        app:layout_constraintTop_toBottomOf="@+id/days4Image" />
+
+
+    <TextView
+        android:id="@+id/days4MinText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="15"
+        android:textColor="@color/secondaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/days4MinCelsiusText"
+        app:layout_constraintTop_toBottomOf="@+id/days4Image" />
+
+    <TextView
+        android:id="@+id/days4MinCelsiusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="°C"
+        android:textColor="@color/secondaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/days4Image"
+        app:layout_constraintTop_toBottomOf="@+id/days4Image" />
+
+
+    <TextView
+        android:id="@+id/days5Block"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:width="120dp"
+        android:height="190dp"
+        android:background="@color/primaryBackgroundColor"
+        android:fontFamily="@font/raleway_medium"
+        android:gravity="center|top"
+        android:paddingTop="15dp"
+        android:text="Wed. 10 Jun"
+        android:textColor="@color/primaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/days1Block"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/days1Block"
+        app:layout_constraintTop_toBottomOf="@+id/days3Block" />
+
+    <ImageView
+        android:id="@+id/days5Image"
+        android:layout_width="87dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/days5Block"
+        app:layout_constraintStart_toStartOf="@+id/days5Block"
+        app:layout_constraintTop_toTopOf="@+id/days5Block"
+        app:srcCompat="@drawable/heavy_rain" />
+
+    <TextView
+        android:id="@+id/days5MaxText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="15"
+        android:textColor="@color/primaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/days5Image"
+        app:layout_constraintTop_toBottomOf="@+id/days5Image" />
+
+    <TextView
+        android:id="@+id/days5MaxCelsiusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="°C"
+        android:textColor="@color/primaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/days5MaxText"
+        app:layout_constraintTop_toBottomOf="@+id/days5Image" />
+
+
+    <TextView
+        android:id="@+id/days5MinText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="15"
+        android:textColor="@color/secondaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/days5MinCelsiusText"
+        app:layout_constraintTop_toBottomOf="@+id/days5Image" />
+
+    <TextView
+        android:id="@+id/days5MinCelsiusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="°C"
+        android:textColor="@color/secondaryColorText"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/days5Image"
+        app:layout_constraintTop_toBottomOf="@+id/days5Image" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

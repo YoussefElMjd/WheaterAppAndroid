@@ -8,13 +8,13 @@
     <fragment
         android:id="@+id/aboutMe"
         android:name="com.example.g56172.screens.about.AboutMeFragment"
-        android:label="fragment_about_me"
+        android:label="About Me"
         tools:layout="@layout/fragment_about_me" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.g56172.screens.login.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homesFragment" />
@@ -22,6 +22,21 @@
     <fragment
         android:id="@+id/homesFragment"
         android:name="com.example.g56172.screens.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homesFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.g56172.screens.details.DetailsFragment"
+        android:label="Details"
+        tools:layout="@layout/fragment_details" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.g56172.screens.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search" />
+
 </navigation>
