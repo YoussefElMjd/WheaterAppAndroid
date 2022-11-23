@@ -4,16 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/custom_input_search">
+    android:background="@drawable/list_item_search">
 
     <TextView
         android:id="@+id/countryNameText"
         android:layout_width="204dp"
         android:layout_height="52dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:fontFamily="@font/raleway_semibold"
         android:text="Belgique"
-        android:textSize="40sp"
+        android:textColor="@color/primaryColorText"
+        android:textSize="30sp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

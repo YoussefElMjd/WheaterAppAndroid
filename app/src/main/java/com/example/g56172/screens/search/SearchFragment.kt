@@ -1,6 +1,7 @@
 package com.example.g56172.screens.search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +31,15 @@ class SearchFragment : Fragment() {
         binding.searchField.setOnFocusChangeListener{_, _ ->
             binding.searchField.showDropDown()
         }
-        binding.favPosListView.setAdapter(adaptater)
+
+        val myListAdapter = activity?.let { CustomListAdapter(it,country) }
+        binding.favPosListView.setAdapter(myListAdapter)
+
+        binding.favPosListView.setOnItemClickListener(){adapterView, view, position, id ->
+            Log.i("Search", adapterView.getItemAtPosition(position).toString())
+            Log.i("Search", adapterView.getItemIdAtPosition(position).toString())
+
+        }
         return binding.root
     }
 }
