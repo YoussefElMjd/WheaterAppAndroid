@@ -3,6 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".screens.home.HomeFragment">
+
+    <data>
+        <variable
+            name="searchViewModel"
+            type="com.example.g56172.screens.search.SearchViewModel" />
+    </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:background="@color/primaryBackgroundColor"
     android:layout_width="match_parent"
@@ -24,6 +30,7 @@
         android:inputType="textEmailAddress"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
+        android:text="@={searchViewModel._searchField}"
         android:textColor="@color/secondaryColorText"
         app:layout_constraintEnd_toStartOf="@+id/searchButton"
         app:layout_constraintStart_toStartOf="parent"

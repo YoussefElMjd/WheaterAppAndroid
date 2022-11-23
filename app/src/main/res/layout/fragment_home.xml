@@ -3,7 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".screens.home.HomeFragment">
-
+    <data>
+        <variable
+            name="homeViewModel"
+            type="com.example.g56172.screens.home.HomeViewModel" />
+    </data>
     <ScrollView
         android:background="@color/primaryBackgroundColor"
         android:id="@+id/scrollViewId"
@@ -77,11 +81,11 @@
                 android:layout_width="208dp"
                 android:layout_height="196dp"
                 android:layout_marginTop="134dp"
-                android:src="@drawable/clear"
+                android:src="@drawable/heavy_rain"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/clear" />
+                 />
 
             <TextView
                 android:id="@+id/degreeText"
@@ -89,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
                 android:fontFamily="@font/raleway_medium"
-                android:text="15"
+                android:text="@={homeViewModel._degreeText}"
                 android:textColor="@color/primaryColorText"
                 android:textSize="110sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -115,7 +119,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/raleway_medium"
-                android:text="Shower"
+                android:text="@={homeViewModel._resumeText}"
                 android:textColor="@color/secondaryColorText"
                 android:textSize="35sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -143,7 +147,7 @@
                 android:layout_marginTop="35dp"
                 android:layout_marginEnd="110dp"
                 android:fontFamily="@font/raleway_medium"
-                android:text="Fri. 5 Jun"
+                android:text="@={homeViewModel._dateText}"
                 android:textColor="@color/secondaryColorText"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -169,7 +173,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="40dp"
                 android:fontFamily="@font/raleway_medium"
-                android:text="Helsinki"
+                android:text="@={homeViewModel._positionText}"
                 android:textColor="@color/secondaryColorText"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -214,7 +218,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="100dp"
                 android:fontFamily="@font/raleway_semibold"
-                android:text="17"
+                android:text="@={homeViewModel._numberMphText}"
                 android:textAlignment="textEnd"
                 android:textColor="@color/primaryColorText"
                 android:textSize="40sp"
@@ -245,7 +249,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/raleway_medium"
-                android:text="WSW"
+                android:text="@={homeViewModel._windDirectionText}"
                 android:textColor="@color/primaryColorText"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/detailTextOne"
@@ -267,7 +271,6 @@
                 android:paddingTop="15dp"
                 android:textColor="@color/primaryColorText"
                 android:textSize="20sp"
-
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detailTextOne" />
@@ -278,7 +281,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="120dp"
                 android:fontFamily="@font/raleway_semibold"
-                android:text="84"
+                android:text="@={homeViewModel._numberHumidityText}"
                 android:textAlignment="textEnd"
                 android:textColor="@color/primaryColorText"
                 android:textSize="40sp"
@@ -314,11 +317,12 @@
                 android:indeterminateTint="@color/progressBarColor"
                 android:max="100"
                 android:min="0"
-                android:progress="84"
+                android:progress="10"
                 android:progressTint="@color/progressBarColor"
                 app:layout_constraintEnd_toEndOf="@+id/detailTextSecond"
                 app:layout_constraintStart_toStartOf="@+id/detailTextSecond"
-                app:layout_constraintTop_toBottomOf="@+id/pourcentText" />
+                app:layout_constraintTop_toBottomOf="@+id/pourcentText"
+                />
 
             <TextView
                 android:id="@+id/detailTextThird"
@@ -344,7 +348,7 @@
                 android:layout_height="49dp"
                 android:layout_marginStart="65dp"
                 android:fontFamily="@font/raleway_semibold"
-                android:text="6,4"
+                android:text="@={homeViewModel._numberVisibilityText}"
                 android:textAlignment="textEnd"
                 android:textColor="@color/primaryColorText"
                 android:textSize="40sp"
@@ -393,7 +397,7 @@
                 android:layout_height="49dp"
                 android:layout_marginStart="90dp"
                 android:fontFamily="@font/raleway_semibold"
-                android:text="998"
+                android:text="@={homeViewModel._numberAirPressureText}"
                 android:textAlignment="textEnd"
                 android:textColor="@color/primaryColorText"
                 android:textSize="40sp"
