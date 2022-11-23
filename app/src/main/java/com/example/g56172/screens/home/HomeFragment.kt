@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.g56172.R
 import com.example.g56172.databinding.FragmentHomeBinding
 
@@ -25,7 +26,11 @@ class HomeFragment : Fragment() {
         )
 
         binding.daysButton.setOnClickListener(){
-            it.findNavController().navigate(R.id.action_homesFragment_to_detailsFragment)
+            findNavController().navigate(R.id.action_homesFragment_to_detailsFragment)
+        }
+
+        binding.searchButton.setOnClickListener {
+            findNavController().navigate(R.id.action_homesFragment_to_searchFragment)
         }
         return binding.root
     }

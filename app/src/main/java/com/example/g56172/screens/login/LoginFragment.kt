@@ -58,6 +58,9 @@ class LoginFragment : Fragment() {
             viewModel.setExistLogin()
         )
         binding.emailfields?.setAdapter(adapter)
+        binding.emailfields?.setOnFocusChangeListener{_, _ ->
+            binding.emailfields?.showDropDown()
+        }
 
         return binding.root
     }

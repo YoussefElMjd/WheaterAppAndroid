@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="@+id/emailfields" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/searchIcon"
             android:layout_width="wrap_content"
             android:layout_height="19dp"
             android:layout_marginStart="70dp"
@@ -71,6 +71,7 @@
             android:inputType="textEmailAddress"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
+            android:completionThreshold="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@={loginViewModel._email}"

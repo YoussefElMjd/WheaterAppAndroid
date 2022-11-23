@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="@+id/emailfield" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/searchIcon"
             android:layout_width="wrap_content"
             android:layout_height="19dp"
             android:layout_marginStart="50dp"
@@ -50,7 +50,7 @@
             android:paddingEnd="12dp"
             android:background="@drawable/custom_input"
             app:layout_constraintBottom_toBottomOf="@+id/loginFragment"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintStart_toEndOf="@+id/searchIcon"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <EditText
