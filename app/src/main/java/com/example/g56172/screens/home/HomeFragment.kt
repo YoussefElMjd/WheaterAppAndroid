@@ -1,11 +1,17 @@
 package com.example.g56172.screens.home
 
+import android.app.Application
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.g56172.R
@@ -24,7 +30,7 @@ class HomeFragment : Fragment() {
             container,
             false
         )
-        viewModel = ViewModelProvider(this).get(HomeViewModel()::class.java)
+        viewModel = ViewModelProvider(this).get(HomeViewModel(requireNotNull(this.activity).application)::class.java)
         binding.homeViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
@@ -36,19 +42,40 @@ class HomeFragment : Fragment() {
         binding.searchButton.setOnClickListener {
             findNavController().navigate(R.id.action_homesFragment_to_searchFragment)
         }
-
+        viewModel.resumeText.observe(viewLifecycleOwner, Observer<String> { resumeWeather ->
+            changeImageView(resumeWeather)
+        })
+        viewModel.numberHumidityText.observe(viewLifecycleOwner, Observer<String> { humidity ->
+            changeProgressBar(humidity.toInt())
+        })
         viewModel.changeDegree("15")
         viewModel.changeResume("Shower")
         viewModel.changeDate("Fri. 5 Jun")
         viewModel.changePosition("Helsinki")
         viewModel.changeNumberMph("7")
         viewModel.changeNumberHumidity("84")
-        viewModel.changeProgressBar( binding.progressBar,95)
         viewModel.changeNumberVisibility("6,4")
         viewModel.changeNumberAirPressure("998")
-        viewModel.changeImageView(binding.imageView)
 
         return binding.root
     }
+    fun changeProgressBar(progress: Int) {
+        binding.progressBar.setProgress(progress)
+    }
 
+    fun changeImageView(resumeWeather : String) {
+        when (resumeWeather) {
+            "Clear" -> binding.imageDesc.setImageResource(R.drawable.clear)
+            "Rain" -> binding.imageDesc.setImageResource(R.drawable.light_rain)
+            "Clouds" -> binding.imageDesc.setImageResource(R.drawable.light_cloud)
+            "Mist" -> binding.imageDesc.setImageResource(R.drawable.heavy_cloud)
+            "Snow" -> binding.imageDesc.setImageResource(R.drawable.snow)
+            "Thunderstorm" -> binding.imageDesc.setImageResource(R.drawable.thunderstorm)
+            "Sleet" -> binding.imageDesc.setImageResource(R.drawable.sleet)
+            "Shower" -> binding.imageDesc.setImageResource(R.drawable.shower)
+            "Hail" -> binding.imageDesc.setImageResource(R.drawable.hail)
+            else -> binding.imageDesc.setImageResource(R.drawable.shower)
+        }
+
+    }
 }

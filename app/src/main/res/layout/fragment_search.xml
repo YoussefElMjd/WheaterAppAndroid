@@ -66,12 +66,12 @@
         android:id="@+id/favPosListView"
         android:layout_width="413dp"
         android:layout_height="646dp"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="100dp"
         android:textColor="@color/secondaryColorText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchIcon" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

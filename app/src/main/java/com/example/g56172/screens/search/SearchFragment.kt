@@ -30,23 +30,30 @@ class SearchFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(SearchViewModel()::class.java)
         binding.searchViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        var country = listOf("Belgique","France","Japon","Epsagne")
-        var adaptater = ArrayAdapter<String>(requireContext(),android.R.layout.simple_list_item_1,country)
+        viewModel.initRepository(requireContext())
+        var country = listOf("Belgique", "France", "Japon", "Epsagne")
+        var adaptater =
+            ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, country)
         binding.searchField.setAdapter(adaptater)
-        binding.searchField.setOnFocusChangeListener{_, _ ->
+        binding.searchField.setOnFocusChangeListener { _, _ ->
             binding.searchField.showDropDown()
         }
         viewModel._searchField.observe(viewLifecycleOwner, { search ->
             viewModel.onSearchField()
         })
-        val myListAdapter = activity?.let { CustomListAdapter(it,country) }
-        binding.favPosListView.setAdapter(myListAdapter)
 
-        binding.favPosListView.setOnItemClickListener(){adapterView, view, position, id ->
+        binding.favPosListView.setOnItemClickListener() { adapterView, view, position, id ->
             Log.i("Search", adapterView.getItemAtPosition(position).toString())
             Log.i("Search", adapterView.getItemIdAtPosition(position).toString())
 
         }
+        updateAdapter()
         return binding.root
+    }
+
+    fun updateAdapter() {
+        val myListAdapter = activity?.let { CustomListAdapter(it, viewModel.getSearchFav()) }
+        binding.favPosListView.setAdapter(myListAdapter)
+
     }
 }

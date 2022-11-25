@@ -77,11 +77,11 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/imageDesc"
                 android:layout_width="208dp"
                 android:layout_height="196dp"
                 android:layout_marginTop="134dp"
-                android:src="@drawable/heavy_rain"
+                android:src="@drawable/clear"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -98,7 +98,7 @@
                 android:textSize="110sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintTop_toBottomOf="@+id/imageDesc" />
 
             <TextView
                 android:id="@+id/celsius"
@@ -110,7 +110,7 @@
                 android:textColor="@color/secondaryColorText"
                 android:textSize="50sp"
                 app:layout_constraintStart_toEndOf="@+id/degreeText"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintTop_toBottomOf="@+id/imageDesc" />
 
             <TextView
                 android:id="@+id/resumeText"
@@ -281,6 +281,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="120dp"
                 android:fontFamily="@font/raleway_semibold"
+                android:inputType="number"
                 android:text="@={homeViewModel._numberHumidityText}"
                 android:textAlignment="textEnd"
                 android:textColor="@color/primaryColorText"
