@@ -1,6 +1,7 @@
 package com.example.g56172.database
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -32,5 +33,7 @@ interface UserLoginDao {
     @Query("SELECT * FROM UserConnection where login = :email")
     fun get(email: String) : UserLogin?
 
+    @Query("SELECT login from UserConnection")
+    fun getEmail() : List<String>
 
 }

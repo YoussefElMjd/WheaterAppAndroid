@@ -1,6 +1,8 @@
 package com.example.g56172.repository
 
 import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.g56172.database.UserLogin
 import com.example.g56172.database.UserLoginDao
 import com.example.g56172.database.WeatherDataBase
@@ -23,6 +25,9 @@ class LoginRepository(context: Context) {
 
     fun getAll() : List<UserLogin>? {
         return loginDao.getAll()
+    }
 
+    fun getEmail() : List<String> {
+        return loginDao.getEmail()
     }
 }

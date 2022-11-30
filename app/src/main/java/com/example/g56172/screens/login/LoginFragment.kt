@@ -2,6 +2,7 @@ package com.example.g56172.screens.login
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -53,7 +54,6 @@ class LoginFragment : Fragment() {
                 hideKeyBoard(view, activity)
             }
         })
-
         updateAdapter()
 
         return binding.root
@@ -71,11 +71,10 @@ class LoginFragment : Fragment() {
             androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
             viewModel.getExistLogin()
         )
-        binding.emailfields.setAdapter(adapter)
-        binding.emailfields.setOnFocusChangeListener { _, _ ->
-            binding.emailfields.showDropDown()
+            binding.emailfields.setAdapter(adapter)
+            binding.emailfields.setOnFocusChangeListener { _, _ ->
+                binding.emailfields.showDropDown()
+            }
         }
-
-    }
 
 }

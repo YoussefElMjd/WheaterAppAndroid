@@ -21,6 +21,9 @@ class LoginViewModel() : ViewModel() {
     val correctLogin: LiveData<Boolean>
         get() = _correctLogin
 
+//    var emails =  MutableLiveData<List<String>>()
+
+
     lateinit var repository: LoginRepository
 
     fun attemptLogin() {
@@ -39,15 +42,8 @@ class LoginViewModel() : ViewModel() {
         _email.value?.let { repository.insert(it) }
     }
 
-    fun getExistLogin() : ArrayList<String>{
-        val logins = repository.getAll()
-        val existLogins = arrayListOf<String>()
-        if (logins != null) {
-            for (login in logins){
-                existLogins.add(login.login)
-            }
-        }
-        return existLogins
+    fun getExistLogin(): List<String> {
+        return repository.getEmail()
     }
 
 
