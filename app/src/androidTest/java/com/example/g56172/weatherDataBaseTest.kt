@@ -14,7 +14,7 @@ import org.junit.runner.RunWith
 import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
-class weatherDataBaseTest {
+class WeatherDataBaseTest {
     private lateinit var userLoginDao: UserLoginDao
     private lateinit var db: WeatherDataBase
 

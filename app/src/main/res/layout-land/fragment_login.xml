@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:windowSoftInputMode="adjustResize"
         tools:context=".MainActivity"
+        android:configChanges="screenSize|orientation|screenLayout|navigation"
     >
 
         <TextView
@@ -49,6 +50,7 @@
             android:layout_marginStart="10dp"
             android:ems="10"
             android:hint="@string/hintPassword"
+            android:text="@={loginViewModel._password}"
             android:imeOptions="flagNoExtractUi"
             android:inputType="textPassword"
             android:paddingStart="12dp"
@@ -59,8 +61,8 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <AutoCompleteTextView
-            android:id="@+id/emailfields"
             style="@style/editTextLoginPage"
+            android:id="@+id/emailfields"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -70,7 +72,7 @@
             android:inputType="textEmailAddress"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
-            android:completionThreshold="1"
+            android:completionThreshold="0"
             android:background="@drawable/custom_input"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/email"
@@ -85,6 +87,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
             android:ems="11"
+            android:onClick="@{() -> loginViewModel.attemptLogin()}"
             android:text="@string/loginButton"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

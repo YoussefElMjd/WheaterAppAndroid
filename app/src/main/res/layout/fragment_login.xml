@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:windowSoftInputMode="adjustResize"
         tools:context=".MainActivity"
+        android:configChanges="screenSize|orientation|screenLayout|navigation"
     >
 
         <TextView
@@ -25,7 +26,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/emailfields"
             app:layout_constraintEnd_toStartOf="@+id/emailfields"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/emailfields" />
+            app:layout_constraintTop_toTopOf="@+id/emailfields"
+            />
 
         <TextView
             android:id="@+id/searchIcon"
@@ -71,7 +73,7 @@
             android:inputType="textEmailAddress"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
-            android:completionThreshold="1"
+            android:completionThreshold="0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@={loginViewModel._email}"

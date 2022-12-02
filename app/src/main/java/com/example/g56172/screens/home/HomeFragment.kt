@@ -1,17 +1,11 @@
 package com.example.g56172.screens.home
 
-import android.app.Application
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ProgressBar
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.g56172.R
@@ -24,7 +18,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate<FragmentHomeBinding>(
+        binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_home,
             container,
@@ -35,19 +29,19 @@ class HomeFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
 
-        binding.daysButton.setOnClickListener(){
+        binding.daysButton.setOnClickListener {
             findNavController().navigate(R.id.action_homesFragment_to_detailsFragment)
         }
 
         binding.searchButton.setOnClickListener {
             findNavController().navigate(R.id.action_homesFragment_to_searchFragment)
         }
-        viewModel.resumeText.observe(viewLifecycleOwner, Observer<String> { resumeWeather ->
+        viewModel.resumeText.observe(viewLifecycleOwner) { resumeWeather ->
             changeImageView(resumeWeather)
-        })
-        viewModel.numberHumidityText.observe(viewLifecycleOwner, Observer<String> { humidity ->
+        }
+        viewModel.numberHumidityText.observe(viewLifecycleOwner) { humidity ->
             changeProgressBar(humidity.toInt())
-        })
+        }
         viewModel.changeDegree("15")
         viewModel.changeResume("Shower")
         viewModel.changeDate("Fri. 5 Jun")

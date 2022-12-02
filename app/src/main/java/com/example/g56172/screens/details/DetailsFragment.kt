@@ -18,7 +18,7 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate<FragmentDetailsBinding>(
+        binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_details,
             container,

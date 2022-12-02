@@ -6,14 +6,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.g56172.repository.CountryFavPosRepository
-import com.example.g56172.repository.LoginRepository
 
 class SearchViewModel : ViewModel() {
     var _searchField = MutableLiveData<String>()
     val searchField: LiveData<String>
         get() = _searchField
 
-    lateinit var repository: CountryFavPosRepository
+    private lateinit var repository: CountryFavPosRepository
 
     fun onSearchField(){
         Log.i("Search",_searchField.value.toString())

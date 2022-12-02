@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.g56172.R
-import com.example.g56172.databinding.FragmentDetailsBinding
 import com.example.g56172.databinding.FragmentSearchBinding
 
 class SearchFragment : Fragment() {
@@ -21,7 +20,7 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate<FragmentSearchBinding>(
+        binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_search,
             container,
@@ -33,16 +32,16 @@ class SearchFragment : Fragment() {
         viewModel.initRepository(requireContext())
         var country = listOf("Belgique", "France", "Japon", "Epsagne")
         var adaptater =
-            ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, country)
+            ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, country)
         binding.searchField.setAdapter(adaptater)
         binding.searchField.setOnFocusChangeListener { _, _ ->
             binding.searchField.showDropDown()
         }
-        viewModel._searchField.observe(viewLifecycleOwner, { search ->
+        viewModel._searchField.observe(viewLifecycleOwner) { search ->
             viewModel.onSearchField()
-        })
+        }
 
-        binding.favPosListView.setOnItemClickListener() { adapterView, view, position, id ->
+        binding.favPosListView.setOnItemClickListener { adapterView, view, position, id ->
             Log.i("Search", adapterView.getItemAtPosition(position).toString())
             Log.i("Search", adapterView.getItemIdAtPosition(position).toString())
 
@@ -51,7 +50,7 @@ class SearchFragment : Fragment() {
         return binding.root
     }
 
-    fun updateAdapter() {
+    private fun updateAdapter() {
         val myListAdapter = activity?.let { CustomListAdapter(it, viewModel.getSearchFav()) }
         binding.favPosListView.setAdapter(myListAdapter)
 

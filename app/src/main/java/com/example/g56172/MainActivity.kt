@@ -1,13 +1,12 @@
 package com.example.g56172
 
-import android.content.Context
+//import com.example.g56172.data.UserData
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-//import com.example.g56172.data.UserData
 import com.example.g56172.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

@@ -1,11 +1,10 @@
 package com.example.g56172.repository
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.g56172.database.UserLogin
 import com.example.g56172.database.UserLoginDao
 import com.example.g56172.database.WeatherDataBase
+import java.time.LocalDateTime
 
 class LoginRepository(context: Context) {
     private lateinit var db: WeatherDataBase
@@ -17,9 +16,11 @@ class LoginRepository(context: Context) {
     }
 
     fun insert(email:String){
-        val exist = loginDao.get(email);
+        val exist = loginDao.get(email)
         if(exist == null){
             loginDao.insert(UserLogin(login=email))
+        } else {
+          updateDateConnection(email)
         }
     }
 
@@ -29,5 +30,9 @@ class LoginRepository(context: Context) {
 
     fun getEmail() : List<String> {
         return loginDao.getEmail()
+    }
+
+    private fun updateDateConnection(email: String){
+        loginDao.updateDateConnection(email, LocalDateTime.now().toString())
     }
 }

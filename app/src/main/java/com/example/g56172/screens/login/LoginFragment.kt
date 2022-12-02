@@ -1,9 +1,9 @@
 package com.example.g56172.screens.login
 
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +11,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.g56172.R
 import com.example.g56172.databinding.FragmentLoginBinding
+
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
@@ -33,15 +35,16 @@ class LoginFragment : Fragment() {
             container,
             false
         )
-        viewModel = ViewModelProvider(this).get(LoginViewModel()::class.java)
+        viewModel = ViewModelProvider(this)[LoginViewModel()::class.java]
         binding.loginViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         viewModel.initRepository(requireContext())
-        viewModel.correctLogin.observe(viewLifecycleOwner, Observer<Boolean> { hasCorrectLogin ->
+        viewModel._correctLogin.observe(viewLifecycleOwner, Observer { hasCorrectLogin ->
             if (!hasCorrectLogin) {
                 val text = "Email is not valid. Please enter a valid email"
                 val duration = Toast.LENGTH_SHORT
                 val toast = Toast.makeText(activity, text, duration)
+                hideKeyBoard(view, activity)
                 toast.show()
             } else {
                 viewModel.insertUserLogin()
@@ -59,22 +62,38 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
-    fun hideKeyBoard(view: View?, activity: FragmentActivity?) {
+    @Override
+    override fun onConfigurationChanged(newConfig: Configuration)
+    {
+        Log.d("tag", "config changed")
+        super.onConfigurationChanged(newConfig)
+        val orientation = newConfig.orientation
+        if (orientation == Configuration.ORIENTATION_PORTRAIT)
+            Log.d("tag", "Portrait")
+        else if (orientation == Configuration.ORIENTATION_LANDSCAPE)
+            Log.d("tag", "Landscape")
+        else
+            Log.w("tag", "other: " + orientation)
+    }
+
+    private fun hideKeyBoard(view: View?, activity: FragmentActivity?) {
         val inputMethodManager =
             activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 
-    fun updateAdapter() {
-        val adapter = ArrayAdapter<String>(
+    private fun updateAdapter() {
+        val adapter = ArrayAdapter(
             requireContext(),
             androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
             viewModel.getExistLogin()
         )
-            binding.emailfields.setAdapter(adapter)
-            binding.emailfields.setOnFocusChangeListener { _, _ ->
+        binding.emailfields.setAdapter(adapter)
+        binding.emailfields.setOnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
                 binding.emailfields.showDropDown()
             }
         }
+    }
 
 }

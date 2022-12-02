@@ -1,12 +1,6 @@
 package com.example.g56172.database
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface UserLoginDao {
@@ -35,5 +29,8 @@ interface UserLoginDao {
 
     @Query("SELECT login from UserConnection")
     fun getEmail() : List<String>
+
+    @Query("UPDATE UserConnection  set connectionTime = :date where login = :email")
+    fun updateDateConnection(email: String, date:String)
 
 }
