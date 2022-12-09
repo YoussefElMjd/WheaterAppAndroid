@@ -8,88 +8,81 @@
             name="loginViewModel"
             type="com.example.g56172.screens.login.LoginViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:windowSoftInputMode="adjustResize"
-        tools:context=".MainActivity"
+        android:layout_height="match_parent"
         android:configChanges="screenSize|orientation|screenLayout|navigation"
-    >
+        android:windowSoftInputMode="adjustResize"
+        tools:context=".MainActivity">
 
         <TextView
             android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
             android:layout_marginEnd="10dp"
             app:drawableLeftCompat="@drawable/ic_email_login"
             app:layout_constraintBottom_toBottomOf="@+id/emailfields"
             app:layout_constraintEnd_toStartOf="@+id/emailfields"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/emailfields"
-            />
+            app:layout_constraintTop_toTopOf="@+id/emailfields" />
 
         <TextView
             android:id="@+id/searchIcon"
             android:layout_width="wrap_content"
             android:layout_height="19dp"
-            android:layout_marginStart="70dp"
             android:layout_marginEnd="10dp"
             app:drawableLeftCompat="@drawable/ic_password_login"
             app:layout_constraintBaseline_toBaselineOf="@+id/passwordfield"
-            app:layout_constraintEnd_toStartOf="@+id/passwordfield"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/passwordfield" />
+
 
         <EditText
             android:id="@+id/passwordfield"
             style="@style/editTextLoginPage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="80dp"
+            android:background="@drawable/custom_input"
             android:ems="10"
             android:hint="@string/hintPassword"
             android:imeOptions="flagNoExtractUi"
+            android:inputType="textPassword"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
-            android:background="@drawable/custom_input"
-            android:inputType="textPassword"
             android:text="@={loginViewModel._password}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailfields"/>
-
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <AutoCompleteTextView
-            style="@style/editTextLoginPage"
             android:id="@+id/emailfields"
+            style="@style/editTextLoginPage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
-            android:layout_marginEnd="80dp"
+            android:layout_marginBottom="50dp"
             android:background="@drawable/custom_input"
+            android:completionThreshold="0"
             android:ems="10"
             android:hint="@string/loginHint"
             android:imeOptions="flagNoExtractUi"
             android:inputType="textEmailAddress"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
-            android:completionThreshold="0"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:text="@={loginViewModel._email}"
-            />
+            app:layout_constraintBottom_toTopOf="@+id/passwordfield"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/loginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="290dp"
+            android:layout_marginTop="50dp"
             android:ems="13"
-            android:text="@string/loginButton"
             android:onClick="@{() -> loginViewModel.attemptLogin()}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/passwordfield"
-            app:layout_constraintStart_toStartOf="@+id/passwordfield"
+            android:text="@string/loginButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/passwordfield" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

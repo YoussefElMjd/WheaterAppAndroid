@@ -63,8 +63,7 @@ class LoginFragment : Fragment() {
     }
 
     @Override
-    override fun onConfigurationChanged(newConfig: Configuration)
-    {
+    override fun onConfigurationChanged(newConfig: Configuration) {
         Log.d("tag", "config changed")
         super.onConfigurationChanged(newConfig)
         val orientation = newConfig.orientation

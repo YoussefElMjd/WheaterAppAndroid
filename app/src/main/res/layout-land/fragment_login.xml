@@ -19,7 +19,7 @@
             android:id="@+id/loginFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="-58dp"
+            tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp" />
 
         <TextView
@@ -36,7 +36,7 @@
             android:id="@+id/searchIcon"
             android:layout_width="wrap_content"
             android:layout_height="19dp"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="20dp"
             app:drawableLeftCompat="@drawable/ic_password_login"
             app:layout_constraintBottom_toBottomOf="@+id/passwordfield"
             app:layout_constraintStart_toEndOf="@+id/emailfields"
@@ -47,50 +47,50 @@
             style="@style/editTextLoginPage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:background="@drawable/custom_input"
             android:ems="10"
             android:hint="@string/hintPassword"
-            android:text="@={loginViewModel._password}"
             android:imeOptions="flagNoExtractUi"
             android:inputType="textPassword"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
-            android:background="@drawable/custom_input"
+            android:text="@={loginViewModel._password}"
             app:layout_constraintBottom_toBottomOf="@+id/loginFragment"
-            app:layout_constraintStart_toEndOf="@+id/searchIcon"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/email"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <AutoCompleteTextView
-            style="@style/editTextLoginPage"
             android:id="@+id/emailfields"
+            style="@style/editTextLoginPage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:background="@drawable/custom_input"
+            android:completionThreshold="0"
             android:ems="10"
             android:hint="@string/loginHint"
             android:imeOptions="flagNoExtractUi"
             android:inputType="textEmailAddress"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
-            android:completionThreshold="0"
-            android:background="@drawable/custom_input"
+            android:text="@={loginViewModel._email}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/email"
-            app:layout_constraintTop_toTopOf="@+id/loginFragment"
-            android:text="@={loginViewModel._email}"/>
+            app:layout_constraintEnd_toStartOf="@+id/passwordfield"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/loginFragment" />
 
 
         <Button
             android:id="@+id/loginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="40dp"
             android:ems="11"
             android:onClick="@{() -> loginViewModel.attemptLogin()}"
             android:text="@string/loginButton"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/passwordfield"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.498" />
 
