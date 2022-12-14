@@ -1,9 +1,11 @@
 package com.example.g56172.screens.home
 
-import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
-import android.location.Geocoder
 import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,20 +13,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.g56172.R
 import com.example.g56172.databinding.FragmentHomeBinding
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
-import java.util.*
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(),LocationListener {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+//    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var locationManager : LocationManager
+    private val locationPermissionCode = 2
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,54 +64,74 @@ class HomeFragment : Fragment() {
         viewModel.changeNumberHumidity("84")
         viewModel.changeNumberVisibility("6,4")
         viewModel.changeNumberAirPressure("998")
-        activity?.let {
-            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(it)
-        }
+//        activity?.let {
+//            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(it)
+//        }
         binding.geoButton.setOnClickListener {
-            getLastLocation()
+            getLocation()
         }
 
         return binding.root
     }
+    private fun getLocation() {
+        locationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if ((ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionCode)
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
+    }
+    override fun onLocationChanged(location: Location) {
 
-    private fun getLastLocation() {
-
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireContext(),
-                android.Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            Toast.makeText(
-                requireContext(),
-                "You don't have the permission for position",
-                Toast.LENGTH_LONG
-            )
-            return
-        } else {
-
-            fusedLocationProviderClient.getLastLocation().addOnSuccessListener {
-                @Override
-                fun onSuccess(location: Location) {
-                    if (location != null) {
-                        var geocoder = Geocoder(requireContext(), Locale.getDefault())
-                        var addresse =
-                            geocoder.getFromLocation(
-                                location.getLatitude(),
-                                location.getLongitude(),
-                                1
-                            )
-                        if (addresse != null) {
-                            Log.i("Location", addresse.get(0).latitude.toString())
-                        }
-                    }
-                }
+       Log.i("Location","Latitude: " + location.latitude + " , Longitude: " + location.longitude);
+    }
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == locationPermissionCode) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(requireContext(), "Permission Granted", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show()
             }
         }
     }
-
+//    private fun getLastLocation() {
+//
+//        if (ActivityCompat.checkSelfPermission(
+//                requireContext(),
+//                ACCESS_FINE_LOCATION
+//            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+//                requireContext(),
+//                android.Manifest.permission.ACCESS_COARSE_LOCATION
+//            ) != PackageManager.PERMISSION_GRANTED
+//        ) {
+//            Toast.makeText(
+//                requireContext(),
+//                "You don't have the permission for position",
+//                Toast.LENGTH_LONG
+//            )
+//            return
+//        } else {
+//
+//            fusedLocationProviderClient.getLastLocation().addOnSuccessListener {
+//                @Override
+//                fun onSuccess(location: Location) {
+//                    if (location != null) {
+//                        var geocoder = Geocoder(requireContext(), Locale.getDefault())
+//                        var addresse =
+//                            geocoder.getFromLocation(
+//                                location.getLatitude(),
+//                                location.getLongitude(),
+//                                1
+//                            )
+//                        if (addresse != null) {
+//                            Log.i("Location", addresse.get(0).latitude.toString())
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
 
     fun changeProgressBar(progress: Int) {
         binding.progressBar.setProgress(progress)
