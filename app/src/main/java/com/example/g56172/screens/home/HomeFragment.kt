@@ -16,17 +16,27 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.g56172.R
+import com.example.g56172.api.Days
+import com.example.g56172.api.RetrofitApi
+import com.example.g56172.api.WeatherFiveDays
 import com.example.g56172.databinding.FragmentHomeBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class HomeFragment : Fragment(),LocationListener {
+class HomeFragment : Fragment(), LocationListener {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
-//    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private lateinit var locationManager : LocationManager
+
+    //    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var locationManager: LocationManager
     private val locationPermissionCode = 2
+
+    private var weather = MutableLiveData<WeatherFiveDays>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -67,29 +77,67 @@ class HomeFragment : Fragment(),LocationListener {
 //        activity?.let {
 //            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(it)
 //        }
+        weather.observe(viewLifecycleOwner) { myWeather ->
+            myWeather?.let {
+                Log.i("WeatherApi", myWeather.list.get(0).weather.get(0).description)
+                viewModel._resumeText.value = myWeather.list.get(0).weather.get(0).description
+                val celsius = (myWeather.list.get(0).main.temp-32)*5/9
+                viewModel._degreeText.value = celsius.toString()
+                viewModel._resumeText.value = myWeather.list.get(0).weather.get(0).main
+                viewModel._resumeText.value = myWeather.list.get(0).weather.get(0).description
+            }
+        }
         binding.geoButton.setOnClickListener {
             getLocation()
-        }
+            val callBack: Callback<WeatherFiveDays> = object : Callback<WeatherFiveDays> {
+                override fun onFailure(call: Call<WeatherFiveDays>, t: Throwable) {
+                    Toast.makeText(requireContext(), "Erreur API", Toast.LENGTH_LONG).show()
+                }
 
+                override fun onResponse(call: Call<WeatherFiveDays>, response: Response<WeatherFiveDays>) {
+                    response.body()?.let {
+                        weather.value = it
+                    }
+                }
+
+            }
+            val jokeApi: Call<WeatherFiveDays> = RetrofitApi.myHttpClient.getWeather()
+            jokeApi.enqueue(callBack)
+        }
         return binding.root
     }
+
     private fun getLocation() {
-        locationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        if ((ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionCode)
+        locationManager =
+            requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if ((ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED)
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                locationPermissionCode
+            )
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
     }
+
     override fun onLocationChanged(location: Location) {
 
-       Log.i("Location","Latitude: " + location.latitude + " , Longitude: " + location.longitude);
+        Log.i("Location", "Latitude: " + location.latitude + " , Longitude: " + location.longitude);
     }
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         if (requestCode == locationPermissionCode) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(requireContext(), "Permission Granted", Toast.LENGTH_SHORT).show()
-            }
-            else {
+            } else {
                 Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show()
             }
         }
