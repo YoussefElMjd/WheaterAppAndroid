@@ -1,6 +1,5 @@
 package com.example.g56172.api
 
-import androidx.lifecycle.LiveData
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 

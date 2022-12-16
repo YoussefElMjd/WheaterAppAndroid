@@ -2,10 +2,15 @@ package com.example.g56172.screens.home
 
 import android.app.Application
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.widget.ProgressBar
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.g56172.api.WeatherFiveDays
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class HomeViewModel(app: Application) : AndroidViewModel(app) {
 
@@ -54,6 +59,8 @@ class HomeViewModel(app: Application) : AndroidViewModel(app) {
         get() = _srcDrawableImage
 
 
+    var weather = MutableLiveData<WeatherFiveDays>()
+
     fun changeDegree(degree: String) {
         _degreeText.value = degree
     }
@@ -86,5 +93,32 @@ class HomeViewModel(app: Application) : AndroidViewModel(app) {
         _numberAirPressureText.value = numberAirPressure
     }
 
+    fun updateViewWithApiVar(myWeather : WeatherFiveDays){
+        val daysWeather = myWeather.list.get(0).weather.get(0)
+        Log.i("WeatherApi", daysWeather.description)
+        _resumeText.value = daysWeather.description
+        val celsius = myWeather.list.get(0).main.temp - 273.15
+        _degreeText.value = celsius.toInt().toString()
+        _resumeText.value = daysWeather.main
+        val date = myWeather.list.get(0).dt_txt
+        val formatter: DateTimeFormatter =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+        val dateTime: LocalDateTime = LocalDateTime.parse(date, formatter)
+        val dateToInsert = dateTime.dayOfWeek.name.substring(0, 2).lowercase()
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() } + ". " + dateTime.dayOfWeek.value + " " + dateTime.month.name.lowercase()
+            .substring(0, 3)
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+        _dateText.value = dateToInsert
+        _positionText.value = myWeather.city.name.lowercase()
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+        _numberMphText.value = myWeather.list.get(0).wind.speed.toString()
+        _windDirectionText.value = myWeather.list.get(0).wind.deg.toString() + "°"
+        _numberHumidityText.value = myWeather.list.get(0).main.humidity.toString()
+        _numberVisibilityText.value = StringBuilder(
+            myWeather.list.get(0).visibility.toString().substring(0, 2)
+        ).insert(1, ',').toString()
+        _numberAirPressureText.value =
+            myWeather.list.get(0).main.pressure.toString()
+    }
 
 }
