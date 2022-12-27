@@ -29,12 +29,12 @@ import retrofit2.Response
 class HomeFragment : Fragment(), LocationListener {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
-
-    //    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-
-
     private lateinit var locationManager: LocationManager
     private val locationPermissionCode = 2
+    companion object Weather{
+        lateinit var weather : WeatherFiveDays
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,17 +64,6 @@ class HomeFragment : Fragment(), LocationListener {
         viewModel.numberHumidityText.observe(viewLifecycleOwner) { humidity ->
             changeProgressBar(humidity.toInt())
         }
-        viewModel.changeDegree("15")
-        viewModel.changeResume("Shower")
-        viewModel.changeDate("Fri. 5 Jun")
-        viewModel.changePosition("Helsinki")
-        viewModel.changeNumberMph("7")
-        viewModel.changeNumberHumidity("84")
-        viewModel.changeNumberVisibility("6,4")
-        viewModel.changeNumberAirPressure("998")
-//        activity?.let {
-//            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(it)
-//        }
         viewModel.weather.observe(viewLifecycleOwner) { myWeather ->
             myWeather?.let {
                 viewModel.updateViewWithApiVar(myWeather)
@@ -84,9 +73,9 @@ class HomeFragment : Fragment(), LocationListener {
         binding.geoButton.setOnClickListener {
             getLocation()
         }
+        getLocation()
         return binding.root
     }
-
 
 
     fun changeProgressBar(progress: Int) {
@@ -122,7 +111,7 @@ class HomeFragment : Fragment(), LocationListener {
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 locationPermissionCode
             )
-        }else {
+        } else {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
         }
     }
@@ -144,7 +133,7 @@ class HomeFragment : Fragment(), LocationListener {
             ) {
                 response.body()?.let { myWeather ->
                     viewModel.updateViewWithApiVar(myWeather)
-
+                    weather = myWeather
                 }
             }
         }
