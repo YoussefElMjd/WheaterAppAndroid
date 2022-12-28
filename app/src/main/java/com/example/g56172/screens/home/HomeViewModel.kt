@@ -1,33 +1,24 @@
 package com.example.g56172.screens.home
 
-import android.app.Application
-import android.graphics.drawable.Drawable
-import android.util.Log
-import android.widget.ProgressBar
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.g56172.api.Days
 import com.example.g56172.api.WeatherFiveDays
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-class HomeViewModel(app: Application) : AndroidViewModel(app) {
+class HomeViewModel() : ViewModel() {
 
-    var _degreeText = MutableLiveData<String>()
-    var _resumeText = MutableLiveData<String>()
-    val resumeText: LiveData<String>
-        get() = _resumeText
-    var _dateText = MutableLiveData<String>()
-    var _positionText = MutableLiveData<String>()
-    var _numberMphText = MutableLiveData<String>()
-    var _windDirectionText = MutableLiveData<String>()
-    var _numberHumidityText = MutableLiveData<String>()
-    val numberHumidityText: LiveData<String>
-        get() = _numberHumidityText
-    var _numberVisibilityText = MutableLiveData<String>()
-    var _numberAirPressureText = MutableLiveData<String>()
+    var degreeText = MutableLiveData<String>()
+    var resumeText = MutableLiveData<String>()
+    var dateText = MutableLiveData<String>()
+    var positionText = MutableLiveData<String>()
+    var numberMphText = MutableLiveData<String>()
+    var windDirectionText = MutableLiveData<String>()
+    var numberHumidityText = MutableLiveData<String>()
+    var numberVisibilityText = MutableLiveData<String>()
+    var numberAirPressureText = MutableLiveData<String>()
 
     var weather = MutableLiveData<WeatherFiveDays>()
 
@@ -61,39 +52,39 @@ class HomeViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun changeDegree(degree: String) {
-        _degreeText.value = degree
+        degreeText.value = degree
     }
 
     fun changeResume(resume: String) {
-        _resumeText.value = resume
+        resumeText.value = resume
     }
 
     fun changeDate(dateText: String) {
-        _dateText.value = dateText
+        this.dateText.value = dateText
     }
 
     fun changePosition(position: String) {
-        _positionText.value = position
+        positionText.value = position
     }
 
     fun changeNumberMph(numberMph: String) {
-        _numberMphText.value = numberMph
+        numberMphText.value = numberMph
     }
 
     fun changeWindDirection(direction: String) {
-        _windDirectionText.value = direction
+        windDirectionText.value = direction
     }
 
     fun changeNumberHumidity(numberHumidity: String) {
-        _numberHumidityText.value = numberHumidity
+        numberHumidityText.value = numberHumidity
     }
 
     fun changeNumberVisibility(numberVisibility: String) {
-        _numberVisibilityText.value = numberVisibility
+        numberVisibilityText.value = numberVisibility
     }
 
     fun changeNumberAirPressure(numberAirPressure: String) {
-        _numberAirPressureText.value = numberAirPressure
+        numberAirPressureText.value = numberAirPressure
     }
 
     fun updateViewWithApiVar(myWeather: WeatherFiveDays) {

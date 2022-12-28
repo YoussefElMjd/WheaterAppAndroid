@@ -1,13 +1,21 @@
 <resources>
     <string name="app_name">g56172</string>
-    <string name="login">Login</string>
-    <string name="password">Password</string>
     <string name="hintPassword">Enter a password</string>
     <string name="loginHint">Enter your email</string>
     <string name="loginButton">LOGIN</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="matricule">56172</string>
     <string name="name">El Majdoul Youssef</string>
     <string name="FirstMenuItem">AboutMe</string>
     <string name="search">Search</string>
+    <string name="days_1_resume_picture">Days 1 resume picture</string>
+    <string name="celcius">°C</string>
+    <string name="days_2_desc">Days 2 resume picture</string>
+    <string name="days_3_desc">Days 3 resume picture</string>
+    <string name="days_4_desc">Days 4 resume picture</string>
+    <string name="days_5_desc">Days 5 resume picture</string>
+    <string name="background_desc">Background picture</string>
+    <string name="days_button_text">other days</string>
+    <string name="search_button_text">Search for places</string>
+    <string name="resume_picture_desc">resume picture</string>
+    <string name="search_button">Search</string>
 </resources>

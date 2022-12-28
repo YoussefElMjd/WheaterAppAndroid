@@ -4,11 +4,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 object RetrofitApi {
-    val baseUrl = "https://api.openweathermap.org/data/2.5/"
-    val jsonConverter: MoshiConverterFactory = MoshiConverterFactory.create()
-    val retrofitBuilder: Retrofit.Builder =
+    private const val baseUrl = "https://api.openweathermap.org/data/2.5/"
+    private val jsonConverter: MoshiConverterFactory = MoshiConverterFactory.create()
+    private val retrofitBuilder: Retrofit.Builder =
         Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(jsonConverter)
-    val retrofit = retrofitBuilder.build()
+    private val retrofit: Retrofit = retrofitBuilder.build()
     val myHttpClient = retrofit.create(MyRetroFitHttpClient::class.java)
 
 }

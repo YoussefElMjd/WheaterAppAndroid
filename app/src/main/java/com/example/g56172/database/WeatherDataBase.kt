@@ -5,11 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [UserLogin::class,CountryFavPos::class], version = 2, exportSchema = false)
+@Database(entities = [UserLogin::class,CountryFavPos::class,CountryCode::class], version = 3, exportSchema = false)
 abstract class WeatherDataBase : RoomDatabase() {
 
     abstract val userLoginDao: UserLoginDao
     abstract val countryFavPosDao: CountryFavPosDao
+    abstract val countryCodeDao: CountryCodeDao
 
     companion object {
         @Volatile

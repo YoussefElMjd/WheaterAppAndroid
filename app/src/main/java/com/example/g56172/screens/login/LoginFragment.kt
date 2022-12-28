@@ -28,35 +28,14 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_login,
             container,
             false
         )
-        viewModel = ViewModelProvider(this)[LoginViewModel()::class.java]
-        binding.loginViewModel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
-        viewModel.initRepository(requireContext())
-        viewModel._correctLogin.observe(viewLifecycleOwner, Observer { hasCorrectLogin ->
-            if (!hasCorrectLogin) {
-                val text = "Email is not valid. Please enter a valid email"
-                val duration = Toast.LENGTH_SHORT
-                val toast = Toast.makeText(activity, text, duration)
-                hideKeyBoard(view, activity)
-                toast.show()
-            } else {
-                viewModel.insertUserLogin()
-                val text = "Email is valid"
-                val duration = Toast.LENGTH_SHORT
-                val toast = Toast.makeText(activity, text, duration)
-                toast.show()
-                updateAdapter()
-                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                hideKeyBoard(view, activity)
-            }
-        })
+        setupViewModel()
+        setupBinding()
         updateAdapter()
 
         return binding.root
@@ -95,4 +74,31 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private fun setupViewModel() {
+        viewModel = ViewModelProvider(this)[LoginViewModel()::class.java]
+        viewModel.initRepository(requireContext())
+        viewModel.correctLogin.observe(viewLifecycleOwner, Observer { hasCorrectLogin ->
+            if (!hasCorrectLogin) {
+                val text = "Email is not valid. Please enter a valid email"
+                val duration = Toast.LENGTH_SHORT
+                val toast = Toast.makeText(activity, text, duration)
+                hideKeyBoard(view, activity)
+                toast.show()
+            } else {
+                viewModel.insertUserLogin()
+                val text = "Email is valid"
+                val duration = Toast.LENGTH_SHORT
+                val toast = Toast.makeText(activity, text, duration)
+                toast.show()
+                updateAdapter()
+                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                hideKeyBoard(view, activity)
+            }
+        })
+    }
+
+    private fun setupBinding() {
+        binding.loginViewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+    }
 }

@@ -7,7 +7,6 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,39 +26,48 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class HomeFragment : Fragment(), LocationListener {
-    private lateinit var binding: FragmentHomeBinding
     private lateinit var locationManager: LocationManager
     private val locationPermissionCode = 2
-    companion object Weather{
-        lateinit var weather : WeatherFiveDays
+
+    companion object Weather {
+        private var firstInit = false
+        private lateinit var binding: FragmentHomeBinding
+        private lateinit var context: Context
+        lateinit var weather: WeatherFiveDays
         private lateinit var viewModel: HomeViewModel
-        private lateinit var context : Context
-        fun makeCallApi(lat: Double, long : Double){
-            val callBack: Callback<WeatherFiveDays> = object : Callback<WeatherFiveDays> {
-                override fun onFailure(call: Call<WeatherFiveDays>, t: Throwable) {
-                    Toast.makeText(context, "Erreur API", Toast.LENGTH_LONG).show()
+        private val callBack: Callback<WeatherFiveDays> = object : Callback<WeatherFiveDays> {
+            override fun onFailure(call: Call<WeatherFiveDays>, t: Throwable) {
+                Toast.makeText(context, "Error API, please try again", Toast.LENGTH_LONG).show()
+                if (viewModel.resumeText.value == "") {
+                    binding.daysButton.isEnabled = false
                 }
 
-                override fun onResponse(
-                    call: Call<WeatherFiveDays>,
-                    response: Response<WeatherFiveDays>
-                ) {
-                    response.body()?.let { myWeather ->
-                        viewModel.updateViewWithApiVar(myWeather)
-                        weather = myWeather
-                    }
+            }
+
+            override fun onResponse(
+                call: Call<WeatherFiveDays>,
+                response: Response<WeatherFiveDays>
+            ) {
+                response.body()?.let { myWeather ->
+                    viewModel.updateViewWithApiVar(myWeather)
+                    weather = myWeather
+                    binding.daysButton.isEnabled = true
                 }
             }
+        }
+
+        @Synchronized fun makeCallApi(lat: Double, long: Double) {
 
             val weatherCall: Call<WeatherFiveDays> =
                 RetrofitApi.myHttpClient.getWeather(lat, long)
             weatherCall.enqueue(callBack)
         }
 
-        fun initContext(context : Context){
+        fun initContext(context: Context) {
             this.context = context
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -70,36 +78,13 @@ class HomeFragment : Fragment(), LocationListener {
             container,
             false
         )
-        viewModel =
-            ViewModelProvider(this).get(HomeViewModel(requireNotNull(this.activity).application)::class.java)
-        binding.homeViewModel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
-
-
-        binding.daysButton.setOnClickListener {
-            findNavController().navigate(R.id.action_homesFragment_to_detailsFragment)
-        }
-
-        binding.searchButton.setOnClickListener {
-            findNavController().navigate(R.id.action_homesFragment_to_searchFragment)
-        }
-        viewModel.resumeText.observe(viewLifecycleOwner) { resumeWeather ->
-            changeImageView(resumeWeather)
-        }
-        viewModel.numberHumidityText.observe(viewLifecycleOwner) { humidity ->
-            changeProgressBar(humidity.toInt())
-        }
-        viewModel.weather.observe(viewLifecycleOwner) { myWeather ->
-            myWeather?.let {
-                viewModel.updateViewWithApiVar(myWeather)
-                changeProgressBar(myWeather.list.get(0).main.humidity)
-            }
-        }
-        binding.geoButton.setOnClickListener {
-            getLocation()
-        }
+        setupViewModel()
+        setupBinding()
         initContext(requireContext())
-//        getLocation()
+        if (!firstInit) {
+            getLocation()
+            firstInit = true
+        }
         return binding.root
     }
 
@@ -143,11 +128,6 @@ class HomeFragment : Fragment(), LocationListener {
     }
 
     override fun onLocationChanged(location: Location) {
-        Log.i(
-            "GeoLocation",
-            "Latitude: " + location.latitude + " , Longitude: " + location.longitude
-        );
-
         makeCallApi(location.latitude, location.longitude)
     }
 
@@ -166,25 +146,38 @@ class HomeFragment : Fragment(), LocationListener {
         }
     }
 
-    fun makeCallApi(lat: Double, long : Double){
-        val callBack: Callback<WeatherFiveDays> = object : Callback<WeatherFiveDays> {
-            override fun onFailure(call: Call<WeatherFiveDays>, t: Throwable) {
-                Toast.makeText(requireContext(), "Erreur API", Toast.LENGTH_LONG).show()
-            }
-
-            override fun onResponse(
-                call: Call<WeatherFiveDays>,
-                response: Response<WeatherFiveDays>
-            ) {
-                response.body()?.let { myWeather ->
-                    viewModel.updateViewWithApiVar(myWeather)
-                    weather = myWeather
-                }
+    private fun setupViewModel() {
+        viewModel =
+            ViewModelProvider(this).get(HomeViewModel()::class.java)
+        viewModel.resumeText.observe(viewLifecycleOwner) { resumeWeather ->
+            changeImageView(resumeWeather)
+        }
+        viewModel.numberHumidityText.observe(viewLifecycleOwner) { humidity ->
+            changeProgressBar(humidity.toInt())
+        }
+        viewModel.weather.observe(viewLifecycleOwner) { myWeather ->
+            myWeather?.let {
+                viewModel.updateViewWithApiVar(myWeather)
+                changeProgressBar(myWeather.list.get(0).main.humidity)
             }
         }
+    }
 
-        val weatherCall: Call<WeatherFiveDays> =
-            RetrofitApi.myHttpClient.getWeather(lat, long)
-        weatherCall.enqueue(callBack)
+    private fun setupBinding() {
+        binding.homeViewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
+
+        binding.daysButton.setOnClickListener {
+            findNavController().navigate(R.id.action_homesFragment_to_detailsFragment)
+        }
+
+        binding.searchButton.setOnClickListener {
+            findNavController().navigate(R.id.action_homesFragment_to_searchFragment)
+        }
+        binding.geoButton.setOnClickListener {
+            getLocation()
+        }
+        binding.daysButton.isEnabled = viewModel.resumeText.value != null
     }
 }

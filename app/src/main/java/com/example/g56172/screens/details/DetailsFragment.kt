@@ -9,9 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.g56172.R
-import com.example.g56172.api.WeatherFiveDays
 import com.example.g56172.databinding.FragmentDetailsBinding
-import com.example.g56172.screens.home.HomeFragment
 import com.example.g56172.screens.home.HomeFragment.Weather.weather
 
 class DetailsFragment : Fragment() {
@@ -28,31 +26,12 @@ class DetailsFragment : Fragment() {
             container,
             false
         )
-        viewModel = ViewModelProvider(this).get(DetailsViewModel()::class.java)
-        binding.detailsViewModel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
-
-
-        viewModel._days1Resume.observe(viewLifecycleOwner) { resumeWeather ->
-            changeImageView(resumeWeather,binding.days1Image)
-        }
-        viewModel._days2Resume.observe(viewLifecycleOwner) { resumeWeather ->
-            changeImageView(resumeWeather,binding.days2Image)
-        }
-        viewModel._days3Resume.observe(viewLifecycleOwner) { resumeWeather ->
-            changeImageView(resumeWeather,binding.days3Image)
-        }
-        viewModel._days4Resume.observe(viewLifecycleOwner) { resumeWeather ->
-            changeImageView(resumeWeather,binding.days4Image)
-        }
-        viewModel._days5Resume.observe(viewLifecycleOwner) { resumeWeather ->
-            changeImageView(resumeWeather,binding.days5Image)
-        }
-        viewModel.updateAll(weather)
+        setupViewModel()
+        setupBinding()
         return binding.root
     }
 
-    fun changeImageView(resume : String, view: ImageView) {
+    fun changeImageView(resume: String, view: ImageView) {
         when (resume) {
             "Clear" -> view.setImageResource(R.drawable.clear)
             "Rain" -> view.setImageResource(R.drawable.light_rain)
@@ -65,6 +44,32 @@ class DetailsFragment : Fragment() {
             "Hail" -> view.setImageResource(R.drawable.hail)
             else -> view.setImageResource(R.drawable.shower)
         }
+    }
 
+    private fun setupViewModel() {
+        viewModel = ViewModelProvider(this).get(DetailsViewModel()::class.java)
+
+
+        viewModel.days1Resume.observe(viewLifecycleOwner) { resumeWeather ->
+            changeImageView(resumeWeather, binding.days1Image)
+        }
+        viewModel.days2Resume.observe(viewLifecycleOwner) { resumeWeather ->
+            changeImageView(resumeWeather, binding.days2Image)
+        }
+        viewModel.days3Resume.observe(viewLifecycleOwner) { resumeWeather ->
+            changeImageView(resumeWeather, binding.days3Image)
+        }
+        viewModel.days4Resume.observe(viewLifecycleOwner) { resumeWeather ->
+            changeImageView(resumeWeather, binding.days4Image)
+        }
+        viewModel.days5Resume.observe(viewLifecycleOwner) { resumeWeather ->
+            changeImageView(resumeWeather, binding.days5Image)
+        }
+        viewModel.updateAll(weather)
+    }
+
+    private fun setupBinding() {
+        binding.detailsViewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
     }
 }

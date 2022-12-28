@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="login">login</string>
+    <string name="days_1_resume_picture">Days 1 resume picture</string>
+    <string name="celcius">°C</string>
+    <string name="days_2_desc">Days 2 resume picture</string>
+    <string name="days_3_desc">Days 3 resume picture</string>
+    <string name="background_desc">Background picture</string>
+    <string name="days_button_text">other days</string>
+    <string name="search_button_text">Search for places</string>
 </resources>

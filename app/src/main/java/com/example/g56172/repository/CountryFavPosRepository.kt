@@ -6,8 +6,8 @@ import com.example.g56172.database.CountryFavPosDao
 import com.example.g56172.database.WeatherDataBase
 
 class CountryFavPosRepository(context: Context) {
-    private lateinit var db: WeatherDataBase
-    private lateinit var countryFavPosDao: CountryFavPosDao
+    private var db: WeatherDataBase
+    private var countryFavPosDao: CountryFavPosDao
 
     init {
         db = WeatherDataBase.getInstance(context)

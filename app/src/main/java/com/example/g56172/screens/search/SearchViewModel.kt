@@ -2,29 +2,40 @@ package com.example.g56172.screens.search
 
 import android.content.Context
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.g56172.api.CountryCodes
+import com.example.g56172.repository.CountryCodeRepository
 import com.example.g56172.repository.CountryFavPosRepository
 import com.google.gson.Gson
 
 class SearchViewModel : ViewModel() {
-    var _searchField = MutableLiveData<String>()
-    val searchField: LiveData<String>
-        get() = _searchField
+    var searchField = MutableLiveData<String>()
 
-    lateinit var repository: CountryFavPosRepository
 
-    fun onSearchField(){
-        Log.i("Search",_searchField.value.toString())
+    lateinit var countryCodeRepository: CountryCodeRepository
+    lateinit var countryFavRepository: CountryFavPosRepository
+
+    fun onSearchField() {
+        Log.i("Search", searchField.value.toString())
     }
 
-    fun getSearchFav() : ArrayList<String>{
-       val countrys = repository.getAll()
+    fun getSearchFav(): ArrayList<String> {
+        val countrys = countryFavRepository.getAll()
         val existCountry = arrayListOf<String>()
         if (countrys != null) {
-            for (country in countrys){
+            for (country in countrys) {
+                existCountry.add(country.country)
+            }
+        }
+        return existCountry
+    }
+
+    fun getSearchCountry(): ArrayList<String> {
+        val countrys = countryCodeRepository.getAll()
+        val existCountry = arrayListOf<String>()
+        if (countrys != null) {
+            for (country in countrys) {
                 existCountry.add(country.country)
             }
         }
@@ -32,8 +43,8 @@ class SearchViewModel : ViewModel() {
     }
 
     fun initRepository(context: Context) {
-        repository = CountryFavPosRepository(context)
-
+        countryFavRepository = CountryFavPosRepository(context)
+        countryCodeRepository = CountryCodeRepository(context)
         var jsonCountry = """
             {
   "country_codes" : [
@@ -1985,13 +1996,19 @@ class SearchViewModel : ViewModel() {
 }
         """
         var gson = Gson()
-        var countryCodes = gson.fromJson<CountryCodes>(jsonCountry,CountryCodes::class.java)
-        for(i in 0..countryCodes.country_codes.size-1){
+        var countryCodes = gson.fromJson<CountryCodes>(jsonCountry, CountryCodes::class.java)
+        for (i in 0..countryCodes.country_codes.size - 1) {
             var country = countryCodes.country_codes.get(i)
-            repository.insert(country.country,country.longitude,country.latitude)
+            countryCodeRepository.insert(
+                country.country,
+                country.alpha2,
+                country.alpha3,
+                country.numeric,
+                country.longitude,
+                country.latitude
+            )
         }
     }
-
 
 
 }

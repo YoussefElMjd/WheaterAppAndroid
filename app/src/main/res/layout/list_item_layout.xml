@@ -17,7 +17,7 @@
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/raleway_semibold"
         android:paddingTop="8dp"
-        android:text="Belgique"
+        android:text=""
         android:textColor="@color/primaryColorText"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -8,21 +8,21 @@ import com.example.g56172.repository.LoginRepository
 
 class LoginViewModel : ViewModel() {
 
-    var _email = MutableLiveData<String>()
+    var email = MutableLiveData<String>()
 
-    var _password = MutableLiveData<String>()
+    var password = MutableLiveData<String>()
 
-    var _correctLogin = MutableLiveData<Boolean>()
+    var correctLogin = MutableLiveData<Boolean>()
 
 
     private lateinit var repository: LoginRepository
 
     fun attemptLogin() {
-        _correctLogin.value = isEmailValid() && _password.value.toString() != "null"
+        correctLogin.value = isEmailValid() && password.value.toString() != "null"
     }
 
     private fun isEmailValid(): Boolean {
-        return Patterns.EMAIL_ADDRESS.matcher(_email.value).matches()
+        return Patterns.EMAIL_ADDRESS.matcher(email.value).matches()
     }
 
     fun initRepository(context: Context) {
@@ -30,7 +30,7 @@ class LoginViewModel : ViewModel() {
     }
 
     fun insertUserLogin() {
-        _email.value?.let { repository.insert(it) }
+        email.value?.let { repository.insert(it) }
     }
 
     fun getExistLogin(): List<String> {

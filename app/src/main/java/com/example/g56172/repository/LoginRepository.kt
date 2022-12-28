@@ -7,8 +7,8 @@ import com.example.g56172.database.WeatherDataBase
 import java.time.LocalDateTime
 
 class LoginRepository(context: Context) {
-    private lateinit var db: WeatherDataBase
-    private lateinit var loginDao: UserLoginDao
+    private var db: WeatherDataBase
+    private var loginDao: UserLoginDao
 
     init{
         db = WeatherDataBase.getInstance(context)
