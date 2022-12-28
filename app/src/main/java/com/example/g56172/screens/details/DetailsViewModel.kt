@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.g56172.R
+import com.example.g56172.api.Days
 import com.example.g56172.api.WeatherFiveDays
 import com.example.g56172.screens.home.HomeFragment
 import com.example.g56172.screens.home.HomeFragment.Weather.weather
@@ -38,6 +39,29 @@ class DetailsViewModel : ViewModel() {
     var _days5Max = MutableLiveData<String>()
     var _days5Min = MutableLiveData<String>()
 
+    fun meanMinDailyTemperature(days : List<Days>, dateText: String): String {
+        var totalTempOfDay = 0.0
+        var numberOfTempOfDay = 0
+        for (i in 0..days.size-1){
+            if(dateText == days.get(i).dt_txt.split(' ')[0] ){
+                totalTempOfDay+=days.get(i).main.temp_min
+                numberOfTempOfDay++
+            }
+        }
+        return toCelsius(totalTempOfDay/numberOfTempOfDay)
+    }
+
+    fun meanMaxDailyTemperature(days : List<Days>,dateText: String): String {
+        var totalTempOfDay = 0.0
+        var numberOfTempOfDay = 0
+        for (i in 0..days.size-1){
+            if(dateText == days.get(i).dt_txt.split(' ')[0] ){
+                totalTempOfDay+=days.get(i).main.temp_max
+                numberOfTempOfDay++
+            }
+        }
+        return toCelsius(totalTempOfDay/numberOfTempOfDay)
+    }
     fun changeDays1Text(
         days1Text: String,
         days1Max: String,
@@ -119,32 +143,32 @@ class DetailsViewModel : ViewModel() {
             when (indexDay) {
                 0 -> changeDays1Text(
                     dateTransform(day.dt_txt),
-                    toCelsius(day.main.temp_min),
-                    toCelsius(day.main.temp_max),
+                    meanMinDailyTemperature(weatherList,day.dt_txt.split(' ')[0]),
+                    meanMaxDailyTemperature(weatherList,day.dt_txt.split(' ')[0]),
                     day.weather.get(0).main
                 )
                 1 -> changeDays2Text(
                     dateTransform(day.dt_txt),
-                    toCelsius(day.main.temp_min),
-                    toCelsius(day.main.temp_max),
+                    meanMinDailyTemperature(weatherList,day.dt_txt.split(' ')[0]),
+                    meanMaxDailyTemperature(weatherList,day.dt_txt.split(' ')[0]),
                     day.weather.get(0).main
                 )
                 2 -> changeDays3Text(
                     dateTransform(day.dt_txt),
-                    toCelsius(day.main.temp_min),
-                    toCelsius(day.main.temp_max),
+                    meanMinDailyTemperature(weatherList,day.dt_txt.split(' ')[0]),
+                    meanMaxDailyTemperature(weatherList,day.dt_txt.split(' ')[0]),
                     day.weather.get(0).main
                 )
                 3 -> changeDays4Text(
                     dateTransform(day.dt_txt),
-                    toCelsius(day.main.temp_min),
-                    toCelsius(day.main.temp_max),
+                    meanMinDailyTemperature(weatherList,day.dt_txt.split(' ')[0]),
+                    meanMaxDailyTemperature(weatherList,day.dt_txt.split(' ')[0]),
                     day.weather.get(0).main
                 )
                 4 -> changeDays5Text(
                     dateTransform(day.dt_txt),
-                    toCelsius(day.main.temp_min),
-                    toCelsius(day.main.temp_max),
+                    meanMinDailyTemperature(weatherList,day.dt_txt.split(' ')[0]),
+                    meanMaxDailyTemperature(weatherList,day.dt_txt.split(' ')[0]),
                     day.weather.get(0).main
                 )
             }

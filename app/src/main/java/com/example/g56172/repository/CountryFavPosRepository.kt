@@ -30,4 +30,8 @@ class CountryFavPosRepository(context: Context) {
     fun getAll(): List<CountryFavPos> {
         return countryFavPosDao.getAll()
     }
+
+    fun getPosCountry(country: String):CountryFavPos{
+        return countryFavPosDao.get(country)
+    }
 }

@@ -28,12 +28,37 @@ import retrofit2.Response
 
 class HomeFragment : Fragment(), LocationListener {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var viewModel: HomeViewModel
     private lateinit var locationManager: LocationManager
     private val locationPermissionCode = 2
     companion object Weather{
         lateinit var weather : WeatherFiveDays
+        private lateinit var viewModel: HomeViewModel
+        private lateinit var context : Context
+        fun makeCallApi(lat: Double, long : Double){
+            val callBack: Callback<WeatherFiveDays> = object : Callback<WeatherFiveDays> {
+                override fun onFailure(call: Call<WeatherFiveDays>, t: Throwable) {
+                    Toast.makeText(context, "Erreur API", Toast.LENGTH_LONG).show()
+                }
 
+                override fun onResponse(
+                    call: Call<WeatherFiveDays>,
+                    response: Response<WeatherFiveDays>
+                ) {
+                    response.body()?.let { myWeather ->
+                        viewModel.updateViewWithApiVar(myWeather)
+                        weather = myWeather
+                    }
+                }
+            }
+
+            val weatherCall: Call<WeatherFiveDays> =
+                RetrofitApi.myHttpClient.getWeather(lat, long)
+            weatherCall.enqueue(callBack)
+        }
+
+        fun initContext(context : Context){
+            this.context = context
+        }
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,7 +98,8 @@ class HomeFragment : Fragment(), LocationListener {
         binding.geoButton.setOnClickListener {
             getLocation()
         }
-        getLocation()
+        initContext(requireContext())
+//        getLocation()
         return binding.root
     }
 
@@ -122,6 +148,25 @@ class HomeFragment : Fragment(), LocationListener {
             "Latitude: " + location.latitude + " , Longitude: " + location.longitude
         );
 
+        makeCallApi(location.latitude, location.longitude)
+    }
+
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == locationPermissionCode) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(requireContext(), "Permission Granted", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    fun makeCallApi(lat: Double, long : Double){
         val callBack: Callback<WeatherFiveDays> = object : Callback<WeatherFiveDays> {
             override fun onFailure(call: Call<WeatherFiveDays>, t: Throwable) {
                 Toast.makeText(requireContext(), "Erreur API", Toast.LENGTH_LONG).show()
@@ -139,21 +184,7 @@ class HomeFragment : Fragment(), LocationListener {
         }
 
         val weatherCall: Call<WeatherFiveDays> =
-            RetrofitApi.myHttpClient.getWeather(location.latitude, location.longitude)
+            RetrofitApi.myHttpClient.getWeather(lat, long)
         weatherCall.enqueue(callBack)
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        if (requestCode == locationPermissionCode) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(requireContext(), "Permission Granted", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show()
-            }
-        }
     }
 }
