@@ -41,19 +41,6 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
-    @Override
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        Log.d("tag", "config changed")
-        super.onConfigurationChanged(newConfig)
-        val orientation = newConfig.orientation
-        if (orientation == Configuration.ORIENTATION_PORTRAIT)
-            Log.d("tag", "Portrait")
-        else if (orientation == Configuration.ORIENTATION_LANDSCAPE)
-            Log.d("tag", "Landscape")
-        else
-            Log.w("tag", "other: " + orientation)
-    }
-
     private fun hideKeyBoard(view: View?, activity: FragmentActivity?) {
         val inputMethodManager =
             activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

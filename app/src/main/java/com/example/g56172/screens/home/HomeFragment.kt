@@ -122,6 +122,7 @@ class HomeFragment : Fragment(), LocationListener {
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 locationPermissionCode
             )
+            getLocation()
         } else {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
         }
