@@ -1,10 +1,7 @@
 package com.example.g56172.database
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
+
 @Dao
 interface CountryCodeDao {
     @Insert
@@ -24,8 +21,8 @@ interface CountryCodeDao {
 
 
     @Query("SELECT * FROM CountryCode")
-    fun getAll() : List<CountryCode>
+    fun getAll(): List<CountryCode>
 
     @Query("SELECT * FROM CountryCode where country = :country")
-    fun get(country: String) : CountryCode
+    fun get(country: String): CountryCode
 }

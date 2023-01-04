@@ -32,28 +32,28 @@ class DetailsViewModel : ViewModel() {
     var days5Max = MutableLiveData<String>()
     var days5Min = MutableLiveData<String>()
 
-    fun meanMinDailyTemperature(days : List<Days>, dateText: String): String {
+    fun meanMinDailyTemperature(days: List<Days>, dateText: String): String {
         var totalTempOfDay = 0.0
         var numberOfTempOfDay = 0
-        for (i in 0..days.size-1){
-            if(dateText == days.get(i).dt_txt.split(' ')[0] ){
-                totalTempOfDay+=days.get(i).main.temp_min
+        for (i in 0..days.size - 1) {
+            if (dateText == days.get(i).dt_txt.split(' ')[0]) {
+                totalTempOfDay += days.get(i).main.temp_min
                 numberOfTempOfDay++
             }
         }
-        return toCelsius(totalTempOfDay/numberOfTempOfDay)
+        return toCelsius(totalTempOfDay / numberOfTempOfDay)
     }
 
-    fun meanMaxDailyTemperature(days : List<Days>,dateText: String): String {
+    fun meanMaxDailyTemperature(days: List<Days>, dateText: String): String {
         var totalTempOfDay = 0.0
         var numberOfTempOfDay = 0
-        for (i in 0..days.size-1){
-            if(dateText == days.get(i).dt_txt.split(' ')[0] ){
-                totalTempOfDay+=days.get(i).main.temp_max
+        for (i in 0..days.size - 1) {
+            if (dateText == days.get(i).dt_txt.split(' ')[0]) {
+                totalTempOfDay += days.get(i).main.temp_max
                 numberOfTempOfDay++
             }
         }
-        return toCelsius(totalTempOfDay/numberOfTempOfDay)
+        return toCelsius(totalTempOfDay / numberOfTempOfDay)
     }
 
     fun changeDays1Text(
@@ -137,32 +137,32 @@ class DetailsViewModel : ViewModel() {
             when (indexDay) {
                 0 -> changeDays1Text(
                     dateTransform(day.dt_txt),
-                    meanMinDailyTemperature(weatherList,day.dt_txt.split(' ')[0]),
-                    meanMaxDailyTemperature(weatherList,day.dt_txt.split(' ')[0]),
+                    meanMinDailyTemperature(weatherList, day.dt_txt.split(' ')[0]),
+                    meanMaxDailyTemperature(weatherList, day.dt_txt.split(' ')[0]),
                     day.weather.get(0).main
                 )
                 1 -> changeDays2Text(
                     dateTransform(day.dt_txt),
-                    meanMinDailyTemperature(weatherList,day.dt_txt.split(' ')[0]),
-                    meanMaxDailyTemperature(weatherList,day.dt_txt.split(' ')[0]),
+                    meanMinDailyTemperature(weatherList, day.dt_txt.split(' ')[0]),
+                    meanMaxDailyTemperature(weatherList, day.dt_txt.split(' ')[0]),
                     day.weather.get(0).main
                 )
                 2 -> changeDays3Text(
                     dateTransform(day.dt_txt),
-                    meanMinDailyTemperature(weatherList,day.dt_txt.split(' ')[0]),
-                    meanMaxDailyTemperature(weatherList,day.dt_txt.split(' ')[0]),
+                    meanMinDailyTemperature(weatherList, day.dt_txt.split(' ')[0]),
+                    meanMaxDailyTemperature(weatherList, day.dt_txt.split(' ')[0]),
                     day.weather.get(0).main
                 )
                 3 -> changeDays4Text(
                     dateTransform(day.dt_txt),
-                    meanMinDailyTemperature(weatherList,day.dt_txt.split(' ')[0]),
-                    meanMaxDailyTemperature(weatherList,day.dt_txt.split(' ')[0]),
+                    meanMinDailyTemperature(weatherList, day.dt_txt.split(' ')[0]),
+                    meanMaxDailyTemperature(weatherList, day.dt_txt.split(' ')[0]),
                     day.weather.get(0).main
                 )
                 4 -> changeDays5Text(
                     dateTransform(day.dt_txt),
-                    meanMinDailyTemperature(weatherList,day.dt_txt.split(' ')[0]),
-                    meanMaxDailyTemperature(weatherList,day.dt_txt.split(' ')[0]),
+                    meanMinDailyTemperature(weatherList, day.dt_txt.split(' ')[0]),
+                    meanMaxDailyTemperature(weatherList, day.dt_txt.split(' ')[0]),
                     day.weather.get(0).main
                 )
             }

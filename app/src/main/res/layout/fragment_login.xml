@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="loginViewModel"
             type="com.example.g56172.screens.login.LoginViewModel" />

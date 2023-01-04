@@ -36,18 +36,18 @@ class HomeViewModel() : ViewModel() {
             return (temp - 273.15).toInt().toString()
         }
 
-        fun meanDailyTemperature(days : List<Days>,dateText: String): String {
+        fun meanDailyTemperature(days: List<Days>, dateText: String): String {
             var totalTempOfDay = 0.0
             var numberOfTempOfDay = 0
-            for (i in 0..days.size){
-                if(dateText == days.get(i).dt_txt.split(' ')[0] ){
-                    totalTempOfDay+=days.get(i).main.temp
+            for (i in 0..days.size) {
+                if (dateText == days.get(i).dt_txt.split(' ')[0]) {
+                    totalTempOfDay += days.get(i).main.temp
                     numberOfTempOfDay++
                 } else {
-                    return toCelsius(totalTempOfDay/numberOfTempOfDay)
+                    return toCelsius(totalTempOfDay / numberOfTempOfDay)
                 }
             }
-            return toCelsius(totalTempOfDay/numberOfTempOfDay)
+            return toCelsius(totalTempOfDay / numberOfTempOfDay)
         }
     }
 
@@ -90,7 +90,12 @@ class HomeViewModel() : ViewModel() {
     fun updateViewWithApiVar(myWeather: WeatherFiveDays) {
         val daysWeather = myWeather.list.get(0).weather.get(0)
         changeResume(daysWeather.main)
-        changeDegree(meanDailyTemperature(myWeather.list,myWeather.list.get(0).dt_txt.split(' ')[0]))
+        changeDegree(
+            meanDailyTemperature(
+                myWeather.list,
+                myWeather.list.get(0).dt_txt.split(' ')[0]
+            )
+        )
         changeDate(dateTransform(myWeather.list.get(0).dt_txt))
         changePosition(myWeather.city.name.lowercase()
             .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() })

@@ -10,29 +10,29 @@ class LoginRepository(context: Context) {
     private var db: WeatherDataBase
     private var loginDao: UserLoginDao
 
-    init{
+    init {
         db = WeatherDataBase.getInstance(context)
         loginDao = db.userLoginDao
     }
 
-    fun insert(email:String){
+    fun insert(email: String) {
         val exist = loginDao.get(email)
-        if(exist == null){
-            loginDao.insert(UserLogin(login=email))
+        if (exist == null) {
+            loginDao.insert(UserLogin(login = email))
         } else {
-          updateDateConnection(email)
+            updateDateConnection(email)
         }
     }
 
-    fun getAll() : List<UserLogin>? {
+    fun getAll(): List<UserLogin>? {
         return loginDao.getAll()
     }
 
-    fun getEmail() : List<String> {
+    fun getEmail(): List<String> {
         return loginDao.getEmail()
     }
 
-    private fun updateDateConnection(email: String){
+    private fun updateDateConnection(email: String) {
         loginDao.updateDateConnection(email, LocalDateTime.now().toString())
     }
 }

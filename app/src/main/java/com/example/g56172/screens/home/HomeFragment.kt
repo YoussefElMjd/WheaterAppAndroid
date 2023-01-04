@@ -11,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -24,6 +23,7 @@ import com.example.g56172.databinding.FragmentHomeBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class HomeFragment : Fragment(), LocationListener {
     private lateinit var locationManager: LocationManager
@@ -31,13 +31,17 @@ class HomeFragment : Fragment(), LocationListener {
 
     companion object Weather {
         private var firstInit = false
-        private lateinit var binding: FragmentHomeBinding
-        private lateinit var context: Context
+        lateinit var binding: FragmentHomeBinding
+        lateinit var context: Context
         lateinit var weather: WeatherFiveDays
-        private lateinit var viewModel: HomeViewModel
+        lateinit var viewModel: HomeViewModel
         private val callBack: Callback<WeatherFiveDays> = object : Callback<WeatherFiveDays> {
             override fun onFailure(call: Call<WeatherFiveDays>, t: Throwable) {
-                Toast.makeText(context, "Error API, please try again", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    context,
+                    "Error API, turn on your connection and try again",
+                    Toast.LENGTH_LONG
+                ).show()
                 if (viewModel.resumeText.value == "") {
                     binding.daysButton.isEnabled = false
                 }
@@ -56,10 +60,15 @@ class HomeFragment : Fragment(), LocationListener {
             }
         }
 
-        @Synchronized fun makeCallApi(lat: Double, long: Double) {
-
+        @Synchronized
+        fun makeCallApi(lat: Double, long: Double) {
+            val inputStream = context.resources.openRawResource(R.raw.api)
+            val properties = Properties()
+            properties.load(inputStream)
+            val apiKey = properties.getProperty("api_key")
+            inputStream.close()
             val weatherCall: Call<WeatherFiveDays> =
-                RetrofitApi.myHttpClient.getWeather(lat, long)
+                RetrofitApi.myHttpClient.getWeather(lat, long, apiKey)
             weatherCall.enqueue(callBack)
         }
 
@@ -117,12 +126,10 @@ class HomeFragment : Fragment(), LocationListener {
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED)
         ) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
+            requestPermissions(
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 locationPermissionCode
             )
-            getLocation()
         } else {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
         }
@@ -132,7 +139,6 @@ class HomeFragment : Fragment(), LocationListener {
         makeCallApi(location.latitude, location.longitude)
     }
 
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -141,6 +147,7 @@ class HomeFragment : Fragment(), LocationListener {
         if (requestCode == locationPermissionCode) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(requireContext(), "Permission Granted", Toast.LENGTH_SHORT).show()
+                getLocation();
             } else {
                 Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show()
             }

@@ -9,15 +9,15 @@ data class CountryCode(
     @PrimaryKey(autoGenerate = true)
     var countryCodeId: Long = 0L,
     @ColumnInfo(name = "country")
-    var country : String = "",
+    var country: String = "",
     @ColumnInfo(name = "alpha2")
-    var alpha2 : String = "",
+    var alpha2: String = "",
     @ColumnInfo(name = "alpha3")
-    var alpha3 : String = "",
+    var alpha3: String = "",
     @ColumnInfo(name = "numeric")
-    var numeric : Int,
+    var numeric: Int,
     @ColumnInfo(name = "longitude")
-    var longitude : Double,
+    var longitude: Double,
     @ColumnInfo(name = "latitude")
-    var latitude : Double
+    var latitude: Double
 )

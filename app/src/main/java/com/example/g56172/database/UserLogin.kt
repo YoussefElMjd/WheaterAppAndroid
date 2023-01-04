@@ -12,5 +12,5 @@ data class UserLogin(
     @ColumnInfo(name = "login")
     var login: String = "",
     @ColumnInfo(name = "connectionTime")
-    var date : String = LocalDateTime.now().toString(),
+    var date: String = LocalDateTime.now().toString(),
 )

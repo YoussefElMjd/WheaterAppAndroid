@@ -1,9 +1,11 @@
 package com.example.g56172.repository
 
 import android.content.Context
-import com.example.g56172.database.*
+import com.example.g56172.database.CountryCode
+import com.example.g56172.database.CountryCodeDao
+import com.example.g56172.database.WeatherDataBase
 
-class CountryCodeRepository(context : Context) {
+class CountryCodeRepository(context: Context) {
 
     private var db: WeatherDataBase
     private var countryCodeDao: CountryCodeDao
@@ -13,7 +15,14 @@ class CountryCodeRepository(context : Context) {
         countryCodeDao = db.countryCodeDao
     }
 
-    fun insert(country: String, alpha2 : String, alpha3 : String, numeric : Int, longitude: Double, latitude: Double) {
+    fun insert(
+        country: String,
+        alpha2: String,
+        alpha3: String,
+        numeric: Int,
+        longitude: Double,
+        latitude: Double
+    ) {
         val exist = countryCodeDao.get(country)
         if (exist == null) {
             countryCodeDao.insert(

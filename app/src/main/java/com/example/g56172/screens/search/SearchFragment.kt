@@ -37,7 +37,7 @@ class SearchFragment : Fragment() {
     private fun updateAdapter() {
         val myListAdapter = activity?.let { CustomListAdapter(it, viewModel.getSearchFav()) }
         binding.favPosListView.setAdapter(myListAdapter)
-        var adaptater =
+        val adaptater =
             ArrayAdapter(
                 requireContext(),
                 android.R.layout.simple_list_item_1,
@@ -49,10 +49,6 @@ class SearchFragment : Fragment() {
     private fun setupViewModel() {
         viewModel = ViewModelProvider(this).get(SearchViewModel()::class.java)
         viewModel.initRepository(requireContext())
-
-        viewModel.searchField.observe(viewLifecycleOwner) { search ->
-            viewModel.onSearchField()
-        }
     }
 
     private fun setupBinding() {
@@ -62,7 +58,7 @@ class SearchFragment : Fragment() {
             binding.searchField.showDropDown()
         }
         binding.searchButton.setOnClickListener {
-            var country = viewModel.searchField.value?.let { it1 ->
+            val country = viewModel.searchField.value?.let { it1 ->
                 viewModel.countryCodeRepository.getPosCountry(
                     it1
                 )
@@ -85,7 +81,7 @@ class SearchFragment : Fragment() {
 
         }
         binding.favPosListView.setOnItemClickListener { adapterView, view, position, id ->
-            var countryChose = viewModel.countryFavRepository.getPosCountry(
+            val countryChose = viewModel.countryFavRepository.getPosCountry(
                 adapterView.getItemAtPosition(position).toString()
             )
             HomeFragment.makeCallApi(countryChose.latitude, countryChose.longitude)

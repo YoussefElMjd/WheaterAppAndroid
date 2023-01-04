@@ -22,15 +22,15 @@ interface UserLoginDao {
 
 
     @Query("SELECT * FROM UserConnection")
-    fun getAll() : List<UserLogin>?
+    fun getAll(): List<UserLogin>?
 
     @Query("SELECT * FROM UserConnection where login = :email")
-    fun get(email: String) : UserLogin?
+    fun get(email: String): UserLogin?
 
     @Query("SELECT login from UserConnection")
-    fun getEmail() : List<String>
+    fun getEmail(): List<String>
 
     @Query("UPDATE UserConnection  set connectionTime = :date where login = :email")
-    fun updateDateConnection(email: String, date:String)
+    fun updateDateConnection(email: String, date: String)
 
 }

@@ -3,7 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".screens.home.HomeFragment">
+
     <data>
+
         <variable
             name="homeViewModel"
             type="com.example.g56172.screens.home.HomeViewModel" />

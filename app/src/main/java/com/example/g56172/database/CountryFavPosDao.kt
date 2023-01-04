@@ -21,8 +21,8 @@ interface CountryFavPosDao {
 
 
     @Query("SELECT * FROM CountryFavPos")
-    fun getAll() : List<CountryFavPos>
+    fun getAll(): List<CountryFavPos>
 
     @Query("SELECT * FROM CountryFavPos where country = :country")
-    fun get(country: String) : CountryFavPos
+    fun get(country: String): CountryFavPos
 }

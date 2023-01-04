@@ -6,8 +6,8 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.example.g56172.database.UserLogin
 import com.example.g56172.database.UserLoginDao
 import com.example.g56172.database.WeatherDataBase
-import org.junit.Assert.assertEquals
 import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
