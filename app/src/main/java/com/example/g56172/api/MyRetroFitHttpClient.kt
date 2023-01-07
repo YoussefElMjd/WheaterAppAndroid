@@ -8,7 +8,6 @@ interface MyRetroFitHttpClient {
 
 
     @GET("forecast")
-//    fun getWeather() : Call<WeatherFiveDays>
     fun getWeather(
         @Query("lat") lat: Double,
         @Query("lon") lon: Double,

@@ -121,7 +121,11 @@ class HomeFragment : Fragment(), LocationListener {
     fun getLocation() {
         locationManager =
             requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        if ((ContextCompat.checkSelfPermission(
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            Toast.makeText(requireContext(), "Please turn on your location", Toast.LENGTH_SHORT)
+                .show()
+
+        } else if ((ContextCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED)
